@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchButton from ''
 
 const propTypes = {
   travelFrom: React.PropTypes.string,

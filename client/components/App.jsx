@@ -4,6 +4,7 @@ import cookie from 'react-cookie';
 import UserForm from './users/UserForm.jsx';
 import TripList from './trips/TripList.jsx';
 import TripForm from './trips/TripForm.jsx';
+import Homepage from './users/Homepage.jsx';
 
 const propTypes = {};
 
