@@ -1,6 +1,7 @@
 import React from 'react';
 import request from 'superagent';
 import cookie from 'react-cookie';
+import Login from './users/Login.jsx';
 import UserForm from './users/UserForm.jsx';
 import TripList from './trips/TripList.jsx';
 import TripForm from './trips/TripForm.jsx';
@@ -77,8 +78,8 @@ class App extends React.Component {
     } else {
       userDisplayElement = (
         <div>
-          <UserForm handleSubmit={this.signUp} buttonText="Sign-Up" />
-          <UserForm handleSubmit={this.logIn} buttonText="Log-In" />
+          <h1>Hello.</h1>
+          <Login signUp={this.signUp} logIn={this.logIn} />
         </div>
       );
     }

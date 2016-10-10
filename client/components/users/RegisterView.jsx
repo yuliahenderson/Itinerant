@@ -5,16 +5,18 @@ const propTypes = {
  openModal: React.PropTypes.func,
 };
 
-class LoginView extends React.Component {
+class RegisterView extends React.Component {
   render() {
    return (
      <div>
-       <button onClick={this.props.openModal}>Login</button>
+       <button
+         onClick={this.props.openModal}
+       >Register</button>
      </div>
    );
  }
 };
 
-LoginView.propTypes = propTypes;
+RegisterView.propTypes = propTypes;
 
-export default LoginView;
+export default RegisterView;
