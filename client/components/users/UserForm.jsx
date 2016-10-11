@@ -1,7 +1,8 @@
 import React from 'react';
 
 const propTypes = {
-  handleSubmit: React.PropTypes.func,
+  logIn: React.PropTypes.func,
+  signUp: React.PropTypes.func,
   buttonText: React.PropTypes.string,
 };
 
@@ -22,7 +23,11 @@ class UserForm extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleSubmit(this.state);
+    if (this.props.buttonText=="signUp") {
+      this.props.signUp(this.state);
+    } else {
+      this.props.logIn(this.state);
+    }
   }
   render() {
     return (
@@ -42,8 +47,9 @@ class UserForm extends React.Component {
             placeholder="password..."
             onChange={this.handleInputChange}
           />
-          <input type="submit" value={this.props.buttonText} />
+          <input type="submit" value="submit" />
         </form>
+        <h2 id="close" onClick={this.props.closeModal}>CLOSE</h2>
       </div>
     );
   }
