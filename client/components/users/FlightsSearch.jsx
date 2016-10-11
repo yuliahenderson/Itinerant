@@ -61,42 +61,38 @@ componentWillReceiveProps(nextProps) {
  render() {
   return(
     <div>
-      <section id="input-fields">
+      <section id="input_fields">
         <input
           type="text"
           name="travelFrom"
           valu={this.state.travelFrom}
           onChange={this.handleEditOfTravelFrom}
+          placeholder="WHERE ARE YOU TRAVELLING FROM?"
         />
         <input
           type="currency"
           name="moneyToSpend"
           value={this.state.moneyToSpend}
           onChange={this.handleEditOfMoneyToSpend}
+          placeholder="HOW MUCH MONEY TO SPEND?"
         />
-        <input
+        <input className="dates"
           type="date"
           name="dateTo"
           value={this.state.localDateTo}
           onChange={this.handleEditOfDateTo}
         />
-        <input
+        <input className="dates"
           type="date"
           name="dateBack"
           value={this.state.localDateBack}
           onChange={this.handleEditOfDateBack}
         />
-        <button class="search_button">SEARCH</button>
+        <button className="search_button">SEARCH</button>
       </section>
-      <section id="about_us">
-       <h1>WHY ITINERANT</h1>
-       <p>Text</p>
-      </section>
-      <footer>
-      </footer>
     </div>
   );
  }
 }
-Post.propTypes = propTypesl
+FlightsSearch.propTypes = propTypes;
 export default FlightsSearch;

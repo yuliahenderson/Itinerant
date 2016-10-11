@@ -1,5 +1,6 @@
 import React from 'react';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
+import FlightSearch from './FlightsSearch.jsx';
 
 const propTypes = {
   children: React.PropTypes.element.isRequired,
@@ -30,15 +31,27 @@ class Homepage extends React.Component {
  render() {
   return(
     <div>
-      <div id="nav">
+      <header className="clearfix" id="navigation">
       <logo>ITINERANT</logo>
+      <nav>
       {
        this.loggedInLinks()
       }
-      </div>
+      </nav>
+      </header>
       <div id="main">
-       {this.props.children}
+       <FlightSearch />
       </div>
+      <section id="about_us">
+       <h1>WHY ITINERANT</h1>
+       <p className="text_about">Lorem Ipsum is simply dummy text of
+       the printing and typesetting industry. Lorem Ipsum has been the
+       industry's standard dummy text ever since the 1500s, when an
+       unknown printer took a galley of type and scrambled it to make
+       a type specimen book.</p>
+      </section>
+      <footer>
+      </footer>
     </div>
   );
  }

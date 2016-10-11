@@ -28,6 +28,8 @@
     "react": "^15.3.1",
     "react-cookie": "^0.4.8",
     "react-dom": "^15.3.1",
+    "react-router": "^2.8.1",
+    "react-routes": "^0.2.6",
     "superagent": "^2.3.0",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.3",
