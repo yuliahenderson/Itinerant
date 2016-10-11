@@ -34,7 +34,7 @@ class Login extends Component {
  closeModal() {
    this.setState({
      modalOpen: false,
-     buttonText: logIn,
+     buttonText: 'logIn',
    });
  }
 

@@ -34,7 +34,7 @@ class TripForm extends React.Component {
             placeholder="trip"
             onChange={this.handleInputChange}
           />
-          <input type="submit" value="TRIP" />
+          <input type="submit" value="SAVE TRIP" />
         </form>
       </div>
     );

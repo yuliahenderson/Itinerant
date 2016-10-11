@@ -4,6 +4,7 @@ const propTypes = {
   logIn: React.PropTypes.func,
   signUp: React.PropTypes.func,
   buttonText: React.PropTypes.string,
+  closeModal: React.PropTypes.func,
 };
 
 class UserForm extends React.Component {
