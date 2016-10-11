@@ -29601,6 +29601,7 @@
 	        _react2.default.createElement(
 	          'button',
 	          {
+	            className: 'login',
 	            onClick: this.props.openModal
 	          },
 	          'Register'
@@ -29825,7 +29826,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'button',
-	          { onClick: this.props.openModal },
+	          { onClick: this.props.openModal, className: 'login floatRight' },
 	          'Login'
 	        )
 	      );
