@@ -1,6 +1,7 @@
 import React from 'react';
 import request from 'superagent';
 import cookie from 'react-cookie';
+import Homepage from './users/Homepage.jsx';
 import Login from './users/Login.jsx';
 import UserForm from './users/UserForm.jsx';
 import TripList from './trips/TripList.jsx';
@@ -78,8 +79,14 @@ class App extends React.Component {
     } else {
       userDisplayElement = (
         <div>
-          <h1>Hello.</h1>
-          <Login signUp={this.signUp} logIn={this.logIn} />
+        <header className="clearfix" id="navigation">
+        <logo>ITINERANT</logo>
+        <nav>
+        <Login signUp={this.signUp} logIn={this.logIn} />
+
+        </nav>
+        </header>
+        <Homepage />
         </div>
       );
     }

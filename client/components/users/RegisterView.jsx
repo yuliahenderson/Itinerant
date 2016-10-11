@@ -10,6 +10,7 @@ class RegisterView extends React.Component {
    return (
      <div>
        <button
+         className="login"
          onClick={this.props.openModal}
        >Register</button>
      </div>
