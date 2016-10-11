@@ -65,7 +65,7 @@ componentWillReceiveProps(nextProps) {
         <input
           type="text"
           name="travelFrom"
-          valu={this.state.travelFrom}
+          value={this.state.travelFrom}
           onChange={this.handleEditOfTravelFrom}
           placeholder="WHERE ARE YOU TRAVELLING FROM?"
         />

@@ -22,10 +22,12 @@
 
 body {
   font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 logo {
   font-size: 2em;
+  font-weight: bold;
   color: black;
   letter-spacing: 2px;
   font-style: bold;
@@ -76,6 +78,24 @@ input.dates {
   margin: 0;
   margin: 1em;
 }
+input[type="text"] {
+  font-size: 1em;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+}
+input[type="currency"] {
+  font-size: 1em;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+}
+input[type="date"] {
+  font-size: 1em;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+}
 button.search_button {
   width: 414px;
   height: 60px;
@@ -83,6 +103,8 @@ button.search_button {
   border: none;
   color: black;
   margin: 1em;
+  font-size: 1em;
+  letter-spacing: 1px;
 }
 #city_name {
   text-align: center;
@@ -90,12 +112,14 @@ button.search_button {
 h1 {
   text-align: center;
   margin: 1em;
+  letter-spacing: 1.5px;
 }
 .text_about {
   text-align: justify;
   margin: 0 14em;
   line-height: 1.5em;
-  font-size: 1.2em;
+  font-size: 1em;
+  letter-spacing: 1px;
 }
 footer {
   background-color: #D3F9D2;
