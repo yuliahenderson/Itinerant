@@ -1,13 +1,14 @@
-/*#login-modal {
+#login-modal {
  position: fixed;
  height: 80%;
  width: 80%;
  top: 10%;
  right: 10%;
- background: rgb(255, 255, 255);
+ background: white;
  border: 5px #dcdcdc  solid;
  overflow: scroll;
  box-sizing: border-box;
+ z-index: 1;
 }
 #show-login {
  position: relative;
@@ -18,8 +19,12 @@
 #close {
  color: blue;
 }
-*/
-
+.floatright{
+  float: right;
+}
+.login {
+  border: none;
+}
 body {
   font-size: 14px;
   font-family: 'Open Sans', sans-serif;

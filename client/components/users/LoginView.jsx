@@ -9,7 +9,7 @@ class LoginView extends React.Component {
   render() {
    return (
      <div>
-       <button onClick={this.props.openModal}>Login</button>
+       <button onClick={this.props.openModal} className="login floatRight">Login</button>
      </div>
    );
  }

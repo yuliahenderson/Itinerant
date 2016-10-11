@@ -1,12 +1,12 @@
 import React from 'react';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
-import Homepage from '../client/components/users/Homepage.jsx';
+import App from '../client/components/App.jsx';
 
 
 const Routes = () => {
   return(
     <Router history={hashHistory}>
-      <Route path="/" component={Homepage} />
+      <Route path="/" component={App} />
     </Router>
   );
 };
