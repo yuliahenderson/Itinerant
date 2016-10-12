@@ -1,33 +1,70 @@
+body {
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+}
+
 #login-modal {
  position: fixed;
- height: 80%;
- width: 80%;
- top: 10%;
- right: 10%;
+ height: 50%;
+ width: 50%;
+ top: 30%;
+ right: 25%;
  background: white;
- border: 5px #dcdcdc  solid;
- overflow: scroll;
+ border: 5px #dcdcdc solid;
+/*  overflow: scroll;*/
  box-sizing: border-box;
  z-index: 1;
 }
 #show-login {
- position: relative;
- padding: 1rem;
+ position: absolute;
+ padding: 2em 4.5em;
  height: 100%;
  width: 100%;
 }
 #close {
- color: blue;
+ color: #dcdcdc;
+ float: right;
+ position: relative;
+ margin-right: 15%;
+ margin-top: -4%;
+ font-size: 1.5em;
 }
 .floatright{
   float: right;
 }
 .login {
-  border: none;
-}
-body {
-  font-size: 14px;
+  float: left;
+  font-size: 1em;
   font-family: 'Open Sans', sans-serif;
+}
+.register {
+  border: none;
+  position: relative;
+  top: 0.5em;
+  margin-left: 1em;
+  padding: 0.7em;
+  font-size: 1em;
+  background-color: #D3F9D2;
+}
+.login-link {
+  float: left;
+}
+.register-link {
+  float: right;
+}
+input.email_password {
+  height: 40px;
+}
+#submit_button {
+  border: none;
+  background-color: #D3F9D2;
+  font-size: 1em;
+}
+input[type="password"] {
+  font-size: 1em;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
 }
 
 logo {
@@ -44,7 +81,7 @@ logo {
 nav {
   font-size: 1.2em;
   float: right;
-  padding: 1.6em;
+  padding: 1em;
   margin-right: 1em;
 }
 
