@@ -34,23 +34,23 @@ class UserForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input
+        <h2 id="close" onClick={this.props.closeModal}>x</h2>
+          <input className="email_password"
             type="text"
             name="email"
             value={this.state.email}
-            placeholder="email..."
+            placeholder="email"
             onChange={this.handleInputChange}
           />
-          <input
+          <input className="email_password"
             type="password"
             name="password"
             value={this.state.password}
-            placeholder="password..."
+            placeholder="password"
             onChange={this.handleInputChange}
           />
-          <input type="submit" value="submit" />
+          <input id="submit_button" type="submit" value="SUBMIT" />
         </form>
-        <h2 id="close" onClick={this.props.closeModal}>CLOSE</h2>
       </div>
     );
   }

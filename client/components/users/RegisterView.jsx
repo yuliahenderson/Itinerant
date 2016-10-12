@@ -8,9 +8,9 @@ const propTypes = {
 class RegisterView extends React.Component {
   render() {
    return (
-     <div>
+     <div className="register-link">
        <button
-         className="login"
+         className="register"
          onClick={this.props.openModal}
        >Register</button>
      </div>
