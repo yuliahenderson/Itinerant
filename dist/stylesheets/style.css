@@ -35,7 +35,6 @@ body {
 .login {
   float: left;
   font-size: 1em;
-  font-family: 'Open Sans', sans-serif;
 }
 .register {
   border: none;
@@ -45,6 +44,10 @@ body {
   padding: 0.7em;
   font-size: 1em;
   background-color: #D3F9D2;
+}
+.logout {
+  float: right;
+  margin-right: 2em;
 }
 .login-link {
   float: left;
@@ -81,7 +84,7 @@ logo {
 nav {
   font-size: 1.2em;
   float: right;
-  padding: 1em;
+  padding: 0.6em;
   margin-right: 1em;
 }
 

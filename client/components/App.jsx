@@ -71,7 +71,7 @@ class App extends React.Component {
     if (this.state.token) {
       userDisplayElement = (
         <div>
-          <button onClick={this.signOut} >Log-Out!</button>
+          <h3 className="logout" onClick={this.signOut}>LogOut</h3>
           <TripForm sendTrip={this.sendTrip} />
           <TripList trips={this.state.trips} />
         </div>
