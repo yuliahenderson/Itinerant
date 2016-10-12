@@ -1,33 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router';
 import FlightSearch from './FlightsSearch.jsx';
+import HomePageView from './HomePageView.jsx';
+import MyAccountView from './MyAccountView.jsx';
+import ResultsView from './ResultsView.jsx';
 
 const propTypes = {
   children: React.PropTypes.element.isRequired,
 }
 class Homepage extends React.Component {
- constructor() {
-  super();
+ constructor(props) {
+  super(props);
   this.state = {
     loggedIn: false,
+    HomePageView: true,
+    MyAccountView: false,
+    ResultsView: false,
   }
+  this.handleHomePageView = this.handleHomePageView.bind(this);
+  this.handleMyAccountView = this.handleMyAccountView.bind(this);
+  this.handleResultsView = this.handleResultsView.bind(this);
  }
+
+ handleHomePageView() {
+    this.setState({
+    HomePageView: true,
+    MyAccountView: false,
+    ResultsView: false,
+    })
+ }
+
+ handleMyAccountView() {
+  this.setState({
+    HomePageView: false,
+    MyAccountView: true,
+    ResultsView: false,
+  })
+}
+
+  handleResultsView() {
+    console.log(this.state.HomePageView)
+    this.setState({
+    HomePageView: false,
+    MyAccountView: false,
+    ResultsView: true,
+    })
+  }
+
  render() {
   return(
     <div>
-      <div id="main">
-       <FlightSearch />
-      </div>
-      <section id="about_us">
-       <h1>WHY ITINERANT</h1>
-       <p className="text_about">Lorem Ipsum is simply dummy text of
-       the printing and typesetting industry. Lorem Ipsum has been the
-       industry's standard dummy text ever since the 1500s, when an
-       unknown printer took a galley of type and scrambled it to make
-       a type specimen book.</p>
-      </section>
-      <footer>
-      </footer>
+    {console.log(this.state.HomePageView, this.state.MyAccountView, this.state.ResultsView)}
+      {this.state.HomePageView ? <HomePageView handleMyAccountView = {this.handleMyAccountView}
+      handleResultsView = {this.handleResultsView} /> : false}
+      {this.state.MyAccountView ? <MyAccountView handleHomePageView = {this.handleHomePageView}
+      handleResultsView = {this.handleResultsView}
+                    trips = {this.state.trips}
+                    sendTrip = {this.sendTrip} /> : false}
+      {this.state.ResultsView ? <ResultsView handleMyAccountView = {this.handleMyAccountView}
+      handleHomePageView = {this.handleHomePageView} /> : false}
     </div>
   );
  }

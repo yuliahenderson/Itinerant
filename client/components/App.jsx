@@ -4,19 +4,20 @@ import cookie from 'react-cookie';
 import Homepage from './users/Homepage.jsx';
 import Login from './users/Login.jsx';
 import UserForm from './users/UserForm.jsx';
-import TripList from './trips/TripList.jsx';
-import TripForm from './trips/TripForm.jsx';
+import MyAccountView from './users/MyAccountView.jsx';
 
 const propTypes = {};
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { trips: [] };
+    this.state = { trips: [], myAccount: false, };
     this.logIn = this.logIn.bind(this);
     this.signUp = this.signUp.bind(this);
     this.signOut = this.signOut.bind(this);
     this.sendTrip = this.sendTrip.bind(this);
+    this.myAccount = this.myAccount.bind(this);
+    this.myAccountStart = this.myAccountStart.bind(this);
   }
   componentDidMount() {
     this.updateAuth();
@@ -66,15 +67,37 @@ class App extends React.Component {
             this.getCurrentUserTrips();
           });
   }
+  myAccount() {
+  this.setState({
+    MyAccountView: true,
+  })
+}
+  myAccountStart() {
+  this.setState({
+    MyAccountView: false,
+  })
+}
+
   render() {
     let userDisplayElement;
     if (this.state.token) {
       userDisplayElement = (
         <div>
-          <h3 className="logout" onClick={this.signOut}>LogOut</h3>
-          <TripForm sendTrip={this.sendTrip} />
-          <TripList trips={this.state.trips} />
-        </div>
+          <header className="clearfix" id="navigation">
+          <logo>ITINERANT</logo>
+           <nav>
+            <h3 className="myAccount" onClick={this.myAccount}>My Account</h3>
+            <h3 className="logout" onClick={this.signOut}>LogOut</h3>
+           </nav>
+          </header>
+          {this.myAccountStart}
+          {this.myAccount ? <MyAccountView myAccount = {this.state.myAccount}
+                    trips = {this.state.trips}
+                    sendTrip = {this.sendTrip } /> : <Homepage /> }
+         <footer>
+         <p>hi! </p>
+         </footer>
+         </div>
       );
     } else {
       userDisplayElement = (
@@ -86,7 +109,21 @@ class App extends React.Component {
 
         </nav>
         </header>
-        <Homepage />
+        <Homepage myAccount = {this.state.myAccount}
+        trips = {this.state.trips}
+        sendTrip = {this.sendTrip}
+         />
+      <section id="about_us">
+       <h1>WHY ITINERANT</h1>
+       <p className="text_about">Lorem Ipsum is simply dummy text of
+       the printing and typesetting industry. Lorem Ipsum has been the
+       industry's standard dummy text ever since the 1500s, when an
+       unknown printer took a galley of type and scrambled it to make
+       a type specimen book.</p>
+      </section>
+        <footer>
+        <p>hi! </p>
+        </footer>
         </div>
       );
     }
