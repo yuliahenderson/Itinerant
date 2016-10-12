@@ -16,6 +16,7 @@ class FlightsSearch extends React.Component {
       localMoneyToSpend: this.props.moneyToSpend || '',
       localDateTo: this.props.dateTo || '',
       localDateBack: this.props.dateBack || '',
+      linkToSearch: false,
     };
     this.handleEditOfTravelFrom = this.handleEditOfTravelFrom.bind(this);
     this.handleEditOfMoneyToSpend = this.handleEditOfMoneyToSpend.bind(this);
@@ -56,7 +57,9 @@ componentWillReceiveProps(nextProps) {
   });
  }
  handleSearch(e) {
-  e.preventDefault();
+  this.setState({
+    linkToSearch: true
+  })
  }
  render() {
   return(
@@ -88,7 +91,7 @@ componentWillReceiveProps(nextProps) {
           value={this.state.localDateBack}
           onChange={this.handleEditOfDateBack}
         />
-        <button className="search_button">SEARCH</button>
+        <button className="search_button" onClick = {this.props.handleResultsView} >SEARCH</button>
       </section>
     </div>
   );
