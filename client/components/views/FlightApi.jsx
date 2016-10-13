@@ -15,8 +15,7 @@ class FlightApi extends React.Component {
     super(props)
     this.state = {
       doors: [],
-      airportDestinationArray:
-      ["ANC", "BRW", "BET", "BTT", "CDV", "DLG", "DUT", "EEK",
+      airportDestinationArray: ["ANC", "BRW", "BET", "BTT", "CDV", "DLG", "DUT", "EEK",
       "FAI", "FYU", "Big", "HOM", "JNU", "ENA", "AKN", "ADQ", "OME", "SDP", "SIT",
       "SGY", "OOK", "UNK", "VDZ", "WRG", "YAK", "BHM", "DHN", "HSV", "MOB", "MGM",
       "MSL", "ELD", "XNA", "FSM", "HRO", "LIT", "TXK", "Hll", "FLG", "IGM", "PGA",
@@ -64,28 +63,31 @@ class FlightApi extends React.Component {
       "CRW", "CKB", "LWB", "HTS", "MGW", "PKB", "CPR", "CYS", "COD", "GCC", "JAC",
       "LAR", "RIW", "RKS", "SHR", "WRL", "CHI", "CHI", "MWH", "NYC", "OXR", "SOP",
       "PNC", "TOP", "WAS", "YMQ", "YTO"]
+
     };
   }
   componentDidMount() {
     this.httpGetFlights();
   }
+
   httpGetFlights() {
-    let legsIdArray = [];
-    let openFlights = [];
-    for (let i = 1; i <= 30; i++) {
+      let newData = [];
+      let openFlights = [];
+      for(let i = 0; i < 30; i++) {
       let randomVariable = Math.floor(Math.random()*519);
       let destinationAirportCode = this.state.airportDestinationArray[randomVariable];
-      console.log(destinationAirportCode);
-    const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92`;
-    request.get(url).then((response) => {
+      console.log(destinationAirportCode)
+      const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92`;
+      request.get(url).then((response) => {
       const budgetData = response.body.offers;
       if (budgetData) {
         let budget = Object.keys(budgetData).map((id) => {
           const individualBudgetData = budgetData[id];
           let RealLegsId = individualBudgetData.legIds[0].toString();
-          let totalFare = individualBudgetData.totalFare.toString();
+          let totalFare = individualBudgetData.totalFare
           let detailsURL = individualBudgetData.detailsUrl.toString();
           const flightData = response.body.legs;
+          let money = this.props.moneyToSpend
           if (flightData) {
           let flights = Object.keys(flightData).map((id) => {
               const individualFlightData = flightData[id];
@@ -93,29 +95,41 @@ class FlightApi extends React.Component {
               if (individualFlightData.segments.length == 1 &&
                   individualFlightData.segments[0].hasSeatMap === true &&
                   RealLegsId === legId) {
+                    if(parseFloat(money) > parseFloat(totalFare)) {
                 let airlineName = individualFlightData.segments[0].airlineName;
                 let arrivalAirportLocation = individualFlightData.segments[0].arrivalAirportLocation;
-                let arrivalAirportCode = individualFlightData.segments[0].arrivalAirportCode;
                 let arrivalTime = individualFlightData.segments[0].arrivalTime;
                 let departureAirportCode = individualFlightData.segments[0].departureAirportCode;
                 let departureAirportLocation = individualFlightData.segments[0].departureAirportLocation;
                 let departureTime = individualFlightData.segments[0].departureTime;
                 let flightNumber = individualFlightData.segments[0].flightNumber;
-                openFlights.push({legId, airlineName, arrivalAirportCode, destinationAirportCode, arrivalAirportLocation, arrivalTime,
+                openFlights.push({legId, airlineName, arrivalAirportLocation, arrivalTime,
                 departureAirportCode, departureTime, departureAirportLocation, flightNumber, RealLegsId,
-                totalFare, detailsURL});
-                console.log(openFlights)
-              }
+                totalFare, detailsURL, destinationAirportCode})
+                openFlights.sort(function(a,b) {
+                  if(a.totalFare > b.totalFare) {
+                    return 1;
+                  }
+                  if (a.totalFare < b.totalFare) {
+                    return -1
+                  } if ( a.totalFare = b.totalFare) {
+                  return 0
+                  }
+                })
+                  }
+                }
+                else if (openFlights.length === 0) {
+                  console.log("no flights")
+                  }
             });
-                this.setState({
-               doors: openFlights,
-            });
-            this.render();
-        }
+            this.setState({
+              doors: openFlights,
             });
           }
         });
       }
+    })
+    }
   }
   httpGetReturnFlights() {
     const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92`;
@@ -150,6 +164,7 @@ class FlightApi extends React.Component {
                 totalFareReturn, detailsURLReturn});
               }
             });
+            console.log(openFlightsReturn);
             this.setState({
               doorsReturn: openFlightsReturn,
             });
@@ -178,19 +193,10 @@ class FlightApi extends React.Component {
                    totalFare = {door.totalFare}
                    detailsURL = {door.detailsURL}
                    returnFlight = {this.httpGetReturnFlights}
+                   destinationAirportCode = {door.departureAirportCode}
                 />
               )
+          } else {
+            alert("Your price is way too high")
           }
 
-      });
-    return(
-        <div>
-          <p className="welcomeMessage"> The trips we found for you: </p>
-          {value}
-        </div>
-      )
-
-  }
-}
-
-export default FlightApi;
