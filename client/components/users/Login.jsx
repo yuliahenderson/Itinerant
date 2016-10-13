@@ -9,7 +9,7 @@ const propTypes = {
 };
 
 class Login extends Component {
- constructor(props) {
+  constructor(props) {
    super(props);
    this.state = {
      modalOpen: false,
@@ -18,8 +18,8 @@ class Login extends Component {
    this.openModalLogin = this.openModalLogin.bind(this);
    this.openModalSignup = this.openModalSignup.bind(this);
    this.closeModal = this.closeModal.bind(this);
- }
- openModalLogin() {
+  }
+  openModalLogin() {
    this.setState({
      modalOpen: true,
      buttonText: 'login',
@@ -54,7 +54,6 @@ class Login extends Component {
             signUp={this.props.signUp}
             buttonText={this.state.buttonText}
           /> : false }
-
      </div>
    );
  }
