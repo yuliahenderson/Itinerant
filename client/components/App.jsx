@@ -1,23 +1,25 @@
 import React from 'react';
 import request from 'superagent';
 import cookie from 'react-cookie';
-import Homepage from './users/Homepage.jsx';
 import Login from './users/Login.jsx';
 import UserForm from './users/UserForm.jsx';
-import MyAccountView from './users/MyAccountView.jsx';
+import Homepage from './views/Homepage.jsx';
+import MyAccountView from './views/MyAccountView.jsx';
 
 const propTypes = {};
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { trips: [], myAccount: false, };
+    this.state = {
+      trips: [],
+      myAccountView: false,
+    };
     this.logIn = this.logIn.bind(this);
     this.signUp = this.signUp.bind(this);
     this.signOut = this.signOut.bind(this);
     this.sendTrip = this.sendTrip.bind(this);
     this.myAccount = this.myAccount.bind(this);
-    this.myAccountStart = this.myAccountStart.bind(this);
   }
   componentDidMount() {
     this.updateAuth();
@@ -57,6 +59,9 @@ class App extends React.Component {
          .then(() => {
            this.updateAuth();
            this.getCurrentUserTrips();
+           this.setState({
+             myAccountView: false,
+           })
          });
   }
   signUp(userDetails) {
@@ -65,35 +70,38 @@ class App extends React.Component {
           .then(() => {
             this.updateAuth();
             this.getCurrentUserTrips();
+            this.setState({
+              myAccountView: false,
+            })
           });
   }
   myAccount() {
-  this.setState({
-    MyAccountView: true,
-  })
-}
-  myAccountStart() {
-  this.setState({
-    MyAccountView: false,
-  })
-}
-
+    this.setState({
+      myAccountView: true,
+    })
+  }
   render() {
     let userDisplayElement;
     if (this.state.token) {
       userDisplayElement = (
         <div>
           <header className="clearfix" id="navigation">
-          <logo>ITINERANT</logo>
-           <nav>
-            <h3 className="myAccount" onClick={this.myAccount}>My Account</h3>
-            <h3 className="logout" onClick={this.signOut}>LogOut</h3>
-           </nav>
+            <logo>ITINERANT</logo>
+            <nav>
+              <div className="login-link">
+                <h3 className="myAccount" onClick={this.myAccount}>My Account</h3>
+              </div>
+              <div className="register-link">
+                <button className="logout" onClick={this.signOut}>LogOut</button>
+              </div>
+            </nav>
           </header>
-          {this.myAccountStart}
-          {this.myAccount ? <MyAccountView myAccount = {this.state.myAccount}
+          {this.state.myAccountView ?
+            <MyAccountView
+                    myAccount = {this.state.myAccountView}
                     trips = {this.state.trips}
-                    sendTrip = {this.sendTrip } /> : <Homepage /> }
+                    sendTrip = {this.sendTrip }
+            /> : <Homepage /> }
          <footer>
          </footer>
          </div>
@@ -101,17 +109,25 @@ class App extends React.Component {
     } else {
       userDisplayElement = (
         <div>
-        <header className="clearfix" id="navigation">
-        <logo>ITINERANT</logo>
-        <nav>
-        <Login signUp={this.signUp} logIn={this.logIn} />
-
-        </nav>
-        </header>
-        <Homepage myAccount = {this.state.myAccount}
-        trips = {this.state.trips}
-        sendTrip = {this.sendTrip}
+          <header className="clearfix" id="navigation">
+            <logo>ITINERANT</logo>
+            <nav>
+              <Login signUp={this.signUp} logIn={this.logIn} />
+            </nav>
+          </header>
+        <Homepage
+          myAccount = {this.state.myAccount}
+          trips = {this.state.trips}
+          sendTrip = {this.sendTrip}
          />
+        <section id="about_us">
+          <h1>WHY ITINERANT</h1>
+          <p className="text_about">Lorem Ipsum is simply dummy text of
+          the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an
+          unknown printer took a galley of type and scrambled it to make
+          a type specimen book.</p>
+        </section>
         <footer>
         </footer>
         </div>

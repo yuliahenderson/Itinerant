@@ -32,11 +32,11 @@ body {
 .floatright{
   float: right;
 }
-.login {
+.login, .myAccount {
   float: left;
   font-size: 1em;
 }
-.register {
+.register, .logout {
   border: none;
   position: relative;
   top: 0.5em;

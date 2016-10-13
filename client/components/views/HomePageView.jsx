@@ -5,8 +5,8 @@ class HomePageView extends React.Component {
   render() {
   return(
     <div>
-      <div id="main">
-       <FlightSearch  handleResultsView = {this.props.handleResultsView} />
+      <div>
+       <FlightSearch handleResultsView = {this.props.handleResultsView} />
       </div>
       <section id="about_us">
        <h1>WHY ITINERANT</h1>
