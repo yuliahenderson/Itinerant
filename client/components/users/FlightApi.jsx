@@ -120,7 +120,6 @@ class FlightApi extends React.Component {
 
     return(
         <div>
-        Hello
         {value}
         </div>
       )

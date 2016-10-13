@@ -8,7 +8,7 @@ class MyAccountView extends React.Component {
   render(){
   return(
     <div>
-      <p> Hi, you are in the my account page! </p>
+      <p className="welcomeMessage">My Saved Trips</p>
       <TripForm sendTrip={this.props.sendTrip} />
       <TripList trips={this.props.trips} />
     </div>
