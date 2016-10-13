@@ -2,7 +2,7 @@ import React from 'react'
 import request from 'superagent';
 import cookie from 'react-cookie';
 import MyAccountView from './MyAccountView.jsx';
-import Login from '../users/Login.jsx';
+import FlightLogin from '../users/FlightLogin.jsx';
 
 class FlightView extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class FlightView extends React.Component {
     this.state = {
       heartButton: false,
       flights: [],
-      logIn: false,
+      logInChecker: false,
     }
     this.handleClick = this.handleClick.bind(this);
     this.saveCurrentUserFlights = this.saveCurrentUserFlights.bind(this);
@@ -27,15 +27,15 @@ class FlightView extends React.Component {
   }
   saveCurrentUserFlights() {
     this.handleClick();
-    console.log(this.props.departureAirport, this.props.arrivalAirport)
-    request.post(`api/flights/${this.props.departureAirport}/${this.props.arrivalAirport}/${this.props.departureTime}`)
+
+    request.post(`api/flights/${this.props.departureAirport}/${this.props.arrivalAirport}/${this.props.dateTo}`)
            .then((response) => {
              const flights = response.body;
              this.setState({ flights });
            })
            .catch(() => {
              this.setState ({
-              logIn: true,
+              logInChecker: true,
              })
              this.updateAuth();
            });
@@ -45,6 +45,7 @@ class FlightView extends React.Component {
       token: cookie.load('token'),
     });
   }
+
            //  {this.state.heartButton ? <MyAccountView
            // departureAirport = {this.props.departureAirport}
            // arrivalAirport = {this.props.arrivalAirport}
@@ -53,7 +54,6 @@ class FlightView extends React.Component {
            //  /> : false }
   render() {
     return(
-
       <div>
       <div id="flightDetails" className="clearfix">
         <p className="airlineName"><a href={this.props.detailsURL} target="_blank">{this.props.airlineName}</a> </p>
@@ -63,7 +63,7 @@ class FlightView extends React.Component {
       </div>
          {this.state.heartButton ? <img className="heartButton" src="stylesheets/heart2.png" /> :
         <img className="heartButton" src="stylesheets/heart.png" onClick={this.saveCurrentUserFlights} /> }
-        {this.state.logIn ? }
+        {this.state.logInChecker ? <FlightLogin login={this.logIn} signUp={this.signUp} /> : false }
 
       </div>
     )

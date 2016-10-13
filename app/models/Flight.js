@@ -1,9 +1,9 @@
 class Flight {
-  constructor({ id, location, arrival, date, user_id }) {
+  constructor({ id, location, arrival, dateTo, user_id }) {
     this.id = id;
     this.location = location;
     this.arrival = arrival;
-    this.date = date;
+    this.dateTo = dateTo;
     this.user_id = user_id;
   }
 }

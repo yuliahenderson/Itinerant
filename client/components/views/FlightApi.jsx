@@ -98,12 +98,13 @@ class FlightApi extends React.Component {
                     if(parseFloat(money) > parseFloat(totalFare)) {
                 let airlineName = individualFlightData.segments[0].airlineName;
                 let arrivalAirportLocation = individualFlightData.segments[0].arrivalAirportLocation;
+                let arrivalAirportCode = individualFlightData.segments[0].arrivalAirportCode;
                 let arrivalTime = individualFlightData.segments[0].arrivalTime;
                 let departureAirportCode = individualFlightData.segments[0].departureAirportCode;
                 let departureAirportLocation = individualFlightData.segments[0].departureAirportLocation;
                 let departureTime = individualFlightData.segments[0].departureTime;
                 let flightNumber = individualFlightData.segments[0].flightNumber;
-                openFlights.push({legId, airlineName, arrivalAirportLocation, arrivalTime,
+                openFlights.push({legId, airlineName, arrivalAirportCode, arrivalAirportLocation, arrivalTime,
                 departureAirportCode, departureTime, departureAirportLocation, flightNumber, RealLegsId,
                 totalFare, detailsURL, destinationAirportCode})
                 openFlights.sort(function(a,b) {
@@ -177,6 +178,7 @@ class FlightApi extends React.Component {
     // if (this.props.moneyToSpend > (parseInt(totalFare) + parseInt(returnTotalFare))) {
 
     const value = this.state.doors.map((door) => {
+          console.log(this.props.dateTo)
           if (door.legId !== "null" ) {
             return (
                 <FlightView
@@ -194,6 +196,7 @@ class FlightApi extends React.Component {
                    detailsURL = {door.detailsURL}
                    returnFlight = {this.httpGetReturnFlights}
                    destinationAirportCode = {door.departureAirportCode}
+                   dateTo = {this.props.dateTo}
                 />
               )
           } else {

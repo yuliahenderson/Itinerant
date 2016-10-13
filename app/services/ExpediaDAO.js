@@ -3,8 +3,8 @@ const sql = require('../config/sqlProvider').expedia;
 const Flight = require('../models/Flight');
 
 class ExpediaDAO {
-  static create({ location, arrival, date, user_id}) {
-    return db.one(sql.create, [location, arrival, date, user_id])
+  static create({ location, arrival, dateTo, user_id}) {
+    return db.one(sql.create, [location, arrival, dateTo, user_id])
              .then((data) => new Flight(data));
   }
   static delete(id) {
