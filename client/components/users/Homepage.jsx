@@ -39,7 +39,7 @@ class Homepage extends React.Component {
 }
 
   handleResultsView() {
-    console.log(this.state.HomePageView)
+    (this.state.HomePageView)
     this.setState({
     HomePageView: false,
     MyAccountView: false,
@@ -50,7 +50,7 @@ class Homepage extends React.Component {
  render() {
   return(
     <div>
-    {console.log(this.state.HomePageView, this.state.MyAccountView, this.state.ResultsView)}
+    {(this.state.HomePageView, this.state.MyAccountView, this.state.ResultsView)}
       {this.state.HomePageView ? <HomePageView handleMyAccountView = {this.handleMyAccountView}
       handleResultsView = {this.handleResultsView} /> : false}
       {this.state.MyAccountView ? <MyAccountView handleHomePageView = {this.handleHomePageView}

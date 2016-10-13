@@ -6,6 +6,7 @@ class FlightView extends React.Component {
     }
   render() {
     return(
+
       <div>
         <p> LegId: {this.props.legId} </p>
         <p> airlineName: {this.props.airlineName} </p>
@@ -16,6 +17,8 @@ class FlightView extends React.Component {
         <p> departureTime: {this.props.departureTime}</p>
         <p> departureLocation:{this.props.departureLocation}</p>
         <p> flightNumber: {this.props.flightNumber}</p>
+        <p> newLeg: {this.props.RealLegsId} </p>
+        <p> totalFare: {this.props.totalFare} </p>
         <p>&nbsp;</p>
 
       </div>

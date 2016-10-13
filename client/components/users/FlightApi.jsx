@@ -8,20 +8,21 @@ class FlightApi extends React.Component {
     super(props)
     this.state = {
       doors: [],
+      budgets:[],
+      newData:[],
     };
   }
 
   componentDidMount() {
-    this.httpGetFlights();
+    // this.httpGetFlights();
+    this.httpGetBudget();
   }
 
-  httpGetFlights() {
-    const url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=JFK&arrivalAirport=LAX&departureDate=2016-10-22&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92'
-    let i = 0;
+  httpGetBudget() {
+    const url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=JFK&arrivalAirport=LAX&departureDate=2016-10-22&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
     request.get(url)
            .then((response) => {
             const budgetData = response.body.offers;
-            let legsIdArray = [];
             let budget: [];
             if (budgetData) {
               budget = Object.keys(budgetData).map((id) => {
@@ -29,41 +30,24 @@ class FlightApi extends React.Component {
                 let RealLegsId = individualBudgetData.legIds[0];
                 let totalFare = individualBudgetData.totalFare;
                 let detailsURL = individualBudgetData.detailsUrl;
-                let moneyToSpend = 500;
-                const newUrl = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=LAX&arrivalAirport=JFK&departureDate=2016-10-28&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92'
-                  request.get(newUrl)
-                         .then((response) => {
-                              const returnBudgetData = response.body.offers;
-                              let dummyArray = [];
-                              let returnBudget = [];
-                              if (returnBudgetData) {
-                                returnBudget = Object.keys(returnBudgetData).map((id) => {
-                                  const returnIndividualBudgetData = returnBudgetData[id];
-                                  let returnLegsId = returnIndividualBudgetData.legIds[0];
-                                  let returnTotalFare = returnIndividualBudgetData.totalFare;
-                                  let returnDetailsURL = returnIndividualBudgetData.detailsUrl;
-                                  if (moneyToSpend > (parseInt(totalFare) + parseInt(returnTotalFare))) {
-                                      dummyArray.push(RealLegsId, totalFare, detailsURL);
-                                      dummyArray.push(returnLegsId, returnTotalFare, returnDetailsURL);
+              return { RealLegsId, totalFare }
+              })
+              // console.log(budget)
+            }
+          // })
+//         }
 
-                                  }
-                                })
-
-                              }
-                        });
-                         console.log(legsIdArray)
-                });
-
-              }
-                     //dummy component
-
+// httpGetFlights() {
+//    const url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=JFK&arrivalAirport=LAX&departureDate=2016-10-22&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
+//     request.get(url)
+           // .then((response) => {
+            console.log(RealLegsId)
               const flightData = response.body.legs;
               let flights: [];
               if (flightData) {
                 flights = Object.keys(flightData).map((id) => {
                   const individualFlightData = flightData[id];
-                  if (flightData[id].segments.length == 1 && flightData[id].segments[0].hasSeatMap === true) {
-                    // console.log(flightData[id])
+                    if (flightData[id].segments.length == 1 && flightData[id].segments[0].hasSeatMap === true) {
                   let legId=individualFlightData.legId;
                   let airlineName = individualFlightData.segments[0].airlineName;
                   let arrivalAirportCode = individualFlightData.segments[0].arrivalAirportCode;
@@ -74,8 +58,7 @@ class FlightApi extends React.Component {
                   let departureTime = individualFlightData.segments[0].departureTime;
                   let flightNumber = individualFlightData.segments[0].flightNumber;
                     return {legId, airlineName, arrivalAirportCode, arrivalAirportLocation, arrivalTime,
-                    departureAirportCode, departureTime, departureAirportLocation, flightNumber,
-                  }
+                    departureAirportCode, departureTime, departureAirportLocation, flightNumber}
                   } else {
                     let legId="null";
                     let airlineName="null";
@@ -87,20 +70,36 @@ class FlightApi extends React.Component {
                     let departureTime = "null";
                     let flightNumber = "null";
                     return {legId, airlineName, arrivalAirportCode, arrivalAirportLocation, arrivalTime,
-                      departureAirportCode, departureTime, departureAirportLocation, flightNumber,
-                       }
+                      departureAirportCode, departureTime, departureAirportLocation, flightNumber}
+                    };
+                })
+              }
+              let newData =[];
+                for (let i=0 ; i < budget.length; i++) {
+                  for (let j=0; j< flights.length; j++) {
+                    if (budget[i].RealLegsId === flights[j].legId) {
+                      newData.push(flights[j].legId, budget[i].RealLegsId, budget[i].totalFare, flights[j].airlineName,
+                        flights[j].arrivalAirportCode, flights[j].arrivalAirportLocation, flights[j].arrivalTime, flights[j].departureAirportCode,
+                        flights[j].departureAirportLocation, flights[j].departureTime, flights[j].flightNumber)
+                      // newData.push(budget[i].totalFare)
+                      // console.log(newData)
+                      console.log(budget[i].totalFare)
+                      console.log(budget[i].RealLegsId)
+                      console.log(flights[j].legId)
+                     // console.log(budget[i].RealLegsId)
+                     // console.log(flights[j].legId)
                     }
-                  });
-                  this.setState({
-                    doors: flights,
-                  });
+                  }
                 }
+              console.log(newData)
+                  this.setState({
+                    doors: newData,
+                  });
     })
   }
 
   render() {
     const value = this.state.doors.map((door) => {
-          if (door.legId !== "null") {
             return (
                 <FlightView
                    legId = {door.legId}
@@ -114,8 +113,6 @@ class FlightApi extends React.Component {
                    flightNumber = {door.flightNumber}
                 />
               )
-          }
-
       });
 
     return(
