@@ -6,7 +6,6 @@ const propTypes = {
   buttonText: React.PropTypes.string,
   closeModal: React.PropTypes.func,
 };
-
 class UserForm extends React.Component {
   constructor(props) {
     super(props);
@@ -35,14 +34,16 @@ class UserForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
         <h2 id="close" onClick={this.props.closeModal}>x</h2>
-          <input className="email_password"
+          <input
+            className="email_password"
             type="text"
             name="email"
             value={this.state.email}
             placeholder="email"
             onChange={this.handleInputChange}
           />
-          <input className="email_password"
+          <input
+            className="email_password"
             type="password"
             name="password"
             value={this.state.password}

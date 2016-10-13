@@ -9,13 +9,16 @@ class FlightView extends React.Component {
       <div>
         <p> LegId: {this.props.legId} </p>
         <p> airlineName: {this.props.airlineName} </p>
-        <p> arrivalAirport: {this.props.arrivalAirport} </p>
-        <p> arrivalLocation: {this.props.arrivalLocation} </p>
-        <p> arrivalTime: {this.props.arrivalTime}</p>
         <p> departureAirport: {this.props.departureAirport}</p>
         <p> departureTime: {this.props.departureTime}</p>
         <p> departureLocation:{this.props.departureLocation}</p>
+        <p> arrivalAirport: {this.props.arrivalAirport} </p>
+        <p> arrivalLocation: {this.props.arrivalLocation} </p>
+        <p> arrivalTime: {this.props.arrivalTime}</p>
         <p> flightNumber: {this.props.flightNumber}</p>
+        <p> detailsURL: {this.props.detailsURL}</p>
+        <p> totalFare:{this.props.totalFare} </p>
+        <p> RealLegsId: {this.props.RealLegsId}</p>
         <p>&nbsp;</p>
 
       </div>
