@@ -8,20 +8,14 @@ class FlightView extends React.Component {
     return(
 
       <div>
-        <p> LegId: {this.props.legId} </p>
-        <p> airlineName: {this.props.airlineName} </p>
-        <p> departureAirport: {this.props.departureAirport}</p>
-        <p> departureTime: {this.props.departureTime}</p>
-        <p> departureLocation:{this.props.departureLocation}</p>
-        <p> arrivalAirport: {this.props.arrivalAirport} </p>
-        <p> arrivalLocation: {this.props.arrivalLocation} </p>
-        <p> arrivalTime: {this.props.arrivalTime}</p>
-        <p> flightNumber: {this.props.flightNumber}</p>
+      <div id="flightDetails" className="clearfix">
+        <p className="airlineName"> {this.props.airlineName} </p>
         <p> detailsURL: {this.props.detailsURL}</p>
         <p> totalFare:{this.props.totalFare} </p>
-        <p> RealLegsId: {this.props.RealLegsId}</p>
-        <p>&nbsp;</p>
-
+        <p className="tripDate"> {this.props.departureTime} - {this.props.arrivalTime} </p>
+        <p className="destination"> {this.props.departureLocation} - {this.props.arrivalLocation} </p>
+      </div>
+        <img className="heartButton" src="stylesheets/heart.png" />
       </div>
     )
   }

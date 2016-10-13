@@ -103,7 +103,6 @@ class App extends React.Component {
                     sendTrip = {this.sendTrip }
             /> : <Homepage /> }
          <footer>
-          <p>hi!</p>
          </footer>
          </div>
       );
@@ -130,7 +129,6 @@ class App extends React.Component {
           a type specimen book.</p>
         </section>
         <footer>
-          <p>hi!</p>
         </footer>
         </div>
       );

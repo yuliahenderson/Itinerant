@@ -12,8 +12,8 @@ const propTypes = {
 
 const ResultsView = () => {
   return(
-    <div>
-      <p> Hi, you are viewing your results page! </p>
+    <div className="searchResults">
+      <p className="welcomeMessage"> The trips we found for you: </p>
       <FlightApi />
     </div>
   );
