@@ -130,8 +130,8 @@ class FlightApi extends React.Component {
       });
     return(
         <div>
-          Hello
-        {value}
+          <p className="welcomeMessage"> The trips we found for you: </p>
+          {value}
         </div>
       )
 

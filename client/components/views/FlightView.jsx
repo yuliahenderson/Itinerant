@@ -8,9 +8,8 @@ class FlightView extends React.Component {
     return(
       <div>
       <div id="flightDetails" className="clearfix">
-        <p className="airlineName"> {this.props.airlineName} </p>
-        <p> detailsURL: {this.props.detailsURL}</p>
-        <p> totalFare:{this.props.totalFare} </p>
+        <p className="airlineName"><a href={this.props.detailsURL} target="_blank">{this.props.airlineName}</a> </p>
+        <p className="ticketPrice"> {this.props.totalFare} </p>
         <p className="tripDate"> {this.props.departureTime} - {this.props.arrivalTime} </p>
         <p className="destination"> {this.props.departureLocation} - {this.props.arrivalLocation} </p>
       </div>

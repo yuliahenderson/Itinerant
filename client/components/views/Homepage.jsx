@@ -16,32 +16,20 @@ class Homepage extends React.Component {
       loggedIn: false,
       HomePageView: true,
       MyAccountView: false,
-      ResultsView: false,
     }
     this.handleHomePageView = this.handleHomePageView.bind(this);
     this.handleMyAccountView = this.handleMyAccountView.bind(this);
-    this.handleResultsView = this.handleResultsView.bind(this);
   }
   handleHomePageView() {
     this.setState({
       HomePageView: true,
       MyAccountView: false,
-      ResultsView: false,
     })
   }
  handleMyAccountView() {
   this.setState({
     HomePageView: false,
     MyAccountView: true,
-    ResultsView: false,
-  })
-}
-handleResultsView() {
-  console.log(this.state.HomePageView)
-  this.setState({
-  HomePageView: false,
-  MyAccountView: false,
-  ResultsView: true,
   })
 }
 render() {
@@ -50,20 +38,14 @@ render() {
       {this.state.HomePageView ?
         <HomePageView
           handleMyAccountView = {this.handleMyAccountView}
-          handleResultsView = {this.handleResultsView}
         /> : false}
       {this.state.MyAccountView ?
         <MyAccountView
           handleHomePageView = {this.handleHomePageView}
-          handleResultsView = {this.handleResultsView}
           trips = {this.state.trips}
           sendTrip = {this.sendTrip}
         /> : false}
-      {this.state.ResultsView ?
-        <ResultsView
-          handleMyAccountView = {this.handleMyAccountView}
-          handleHomePageView = {this.handleHomePageView}
-        /> : false}
+
     </div>
   );
  }
