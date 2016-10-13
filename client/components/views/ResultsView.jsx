@@ -1,5 +1,4 @@
 import React from 'react';
-import FlightSearch from './FlightsSearch.jsx';
 import FlightApi from './FlightApi.jsx';
 
 const propTypes = {
