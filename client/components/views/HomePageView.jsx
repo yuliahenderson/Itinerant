@@ -6,7 +6,7 @@ class HomePageView extends React.Component {
   return(
     <div>
       <div>
-       <FlightSearch handleResultsView = {this.props.handleResultsView} />
+       <FlightSearch />
       </div>
     </div>
   );
