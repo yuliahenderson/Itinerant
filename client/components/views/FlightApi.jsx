@@ -106,6 +106,16 @@ class FlightApi extends React.Component {
                 openFlights.push({legId, airlineName, arrivalAirportLocation, arrivalTime,
                 departureAirportCode, departureTime, departureAirportLocation, flightNumber, RealLegsId,
                 totalFare, detailsURL, destinationAirportCode})
+                openFlights.sort(function(a,b) {
+                  if(a.totalFare > b.totalFare) {
+                    return 1;
+                  }
+                  if (a.totalFare < b.totalFare) {
+                    return -1
+                  } if ( a.totalFare = b.totalFare) {
+                  return 0
+                  }
+                })
                   }
                 }
                 else if (openFlights.length === 0) {
