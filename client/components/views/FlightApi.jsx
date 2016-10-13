@@ -199,4 +199,14 @@ class FlightApi extends React.Component {
           } else {
             alert("Your price is way too high")
           }
+        });
+    return(
+      <div>
+      <p className="welcomeMessage">The trips we found for you:</p>
+      {value}
+      </div>
+      )
+  }
+}
+export default FlightApi;
 
