@@ -8,7 +8,6 @@ class TripList extends React.Component {
   render() {
     return (
       <div>
-      <h2>My Trips</h2>
         {this.props.trips.map((trip) => trip.body).join(` & `)}
       </div>
     );

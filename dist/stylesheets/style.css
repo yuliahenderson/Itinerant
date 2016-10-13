@@ -45,10 +45,16 @@ body {
   font-size: 1em;
   background-color: #D3F9D2;
 }
-.logout {
-  float: right;
+.myAccount {
+  float: left;
+  font-size: 1em;
   margin-right: 2em;
 }
+.logout {
+  float: right;
+  font-size: 1em;
+}
+
 .login-link {
   float: left;
 }
@@ -166,6 +172,52 @@ h1 {
   font-size: 1em;
   letter-spacing: 1px;
   line-height: 2em;
+}
+#flightDetails {
+  display: inline-block;
+  background-color: #D3F9D2;
+  border: 5px solid #dcdcdc;
+  padding: 2em;
+  font-size: 1.2em;
+  width: 820px;
+  height: 150px;
+  margin: 1em;
+}
+.airlineName {
+  float: left;
+  margin: 1em;
+  font-weight: bold;
+  font-size: 1.2em;
+  position: relative;
+  top: 1.5em;
+  width: 200px;
+  text-align: center;
+}
+.tripDate {
+  float: left;
+  margin-left: 2em;
+  margin-right: 2em;
+  position: relative;
+  top: 1.2em;
+}
+.destination {
+  position: relative;
+  top: 2em;
+  width: 600px;
+  left: 8.3em;
+}
+.searchResults {
+  margin-left: 5%;
+}
+.heartButton {
+  position: relative;
+  top: 2em;
+  left: 2em;
+  width: 32px;
+}
+.welcomeMessage {
+  font-size: 1.5em;
+  margin-left: 1em;
 }
 footer {
   background-color: #D3F9D2;
