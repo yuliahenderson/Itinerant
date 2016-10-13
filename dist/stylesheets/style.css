@@ -198,20 +198,32 @@ h1 {
   margin-left: 2em;
   margin-right: 2em;
   position: relative;
-  top: 1.2em;
+  top: -3em;
+  left: 16em;
 }
 .destination {
   position: relative;
-  top: 2em;
+  top: 4em;
   width: 600px;
-  left: 8.3em;
+  left: 5.6em;
+}
+.ticketPrice {
+  float: left;
+  position: relative;
+  top: 4em;
+  right: 8em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.ticketPrice:before {
+  content: "$";
 }
 .searchResults {
   margin-left: 5%;
 }
 .heartButton {
   position: relative;
-  top: 2em;
+  top: 4em;
   left: 2em;
   width: 32px;
 }
