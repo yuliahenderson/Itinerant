@@ -6,6 +6,7 @@ class FlightView extends React.Component {
     }
   render() {
     return(
+
       <div>
       <div id="flightDetails" className="clearfix">
         <p className="airlineName"><a href={this.props.detailsURL} target="_blank">{this.props.airlineName}</a> </p>
