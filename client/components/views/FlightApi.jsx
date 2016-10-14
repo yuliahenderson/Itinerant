@@ -178,7 +178,6 @@ class FlightApi extends React.Component {
     // if (this.props.moneyToSpend > (parseInt(totalFare) + parseInt(returnTotalFare))) {
 
     const value = this.state.doors.map((door) => {
-          console.log(this.props.dateTo)
           if (door.legId !== "null" ) {
             return (
                 <FlightView

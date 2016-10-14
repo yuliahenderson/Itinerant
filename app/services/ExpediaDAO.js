@@ -13,6 +13,7 @@ class ExpediaDAO {
   static searchBy(keyValue) {
     const key = Object.keys(keyValue)[0];
     const value = keyValue[key];
+
     return db.map(sql.find, [key, value], (row) => new Flight(row));
   }
 }

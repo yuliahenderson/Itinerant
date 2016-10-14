@@ -27173,12 +27173,14 @@
 	
 	    _this.state = {
 	      trips: [],
+	      flights: [],
 	      myAccountView: false
 	    };
 	    _this.logIn = _this.logIn.bind(_this);
 	    _this.signUp = _this.signUp.bind(_this);
 	    _this.signOut = _this.signOut.bind(_this);
 	    _this.sendTrip = _this.sendTrip.bind(_this);
+	    _this.sendFlights = _this.sendFlights.bind(_this);
 	    _this.myAccount = _this.myAccount.bind(_this);
 	    return _this;
 	  }
@@ -27188,39 +27190,64 @@
 	    value: function componentDidMount() {
 	      this.updateAuth();
 	      if (_reactCookie2.default.load('token')) {
+	        this.getCurrentUserFlights();
 	        this.getCurrentUserTrips();
 	      }
 	    }
 	  }, {
-	    key: 'getCurrentUserTrips',
-	    value: function getCurrentUserTrips() {
+	    key: 'getCurrentUserFlights',
+	    value: function getCurrentUserFlights() {
 	      var _this2 = this;
 	
-	      _superagent2.default.get('/api/trips').then(function (response) {
-	        var trips = response.body;
-	        _this2.setState({ trips: trips });
+	      _superagent2.default.get('/api/flights').then(function (response) {
+	        console.log(response);
+	        var flights = response.body;
+	        _this2.setState({ flights: flights });
 	      }).catch(function () {
 	        _this2.updateAuth();
 	      });
 	    }
 	  }, {
-	    key: 'sendTrip',
-	    value: function sendTrip(_ref) {
+	    key: 'sendFlights',
+	    value: function sendFlights(_ref) {
 	      var _this3 = this;
 	
 	      var body = _ref.body;
 	
+	      _superagent2.default.post('/api/flights').send({ body: body }).then(function () {
+	        _this3.getCurrentUserFlights();
+	      });
+	    }
+	  }, {
+	    key: 'getCurrentUserTrips',
+	    value: function getCurrentUserTrips() {
+	      var _this4 = this;
+	
+	      _superagent2.default.get('/api/trips').then(function (response) {
+	        var trips = response.body;
+	        _this4.setState({ trips: trips });
+	      }).catch(function () {
+	        _this4.updateAuth();
+	      });
+	    }
+	  }, {
+	    key: 'sendTrip',
+	    value: function sendTrip(_ref2) {
+	      var _this5 = this;
+	
+	      var body = _ref2.body;
+	
 	      _superagent2.default.post('/api/trips').send({ body: body }).then(function () {
-	        _this3.getCurrentUserTrips();
+	        _this5.getCurrentUserTrips();
 	      });
 	    }
 	  }, {
 	    key: 'signOut',
 	    value: function signOut() {
-	      var _this4 = this;
+	      var _this6 = this;
 	
 	      _superagent2.default.post('/api/signout').then(function () {
-	        return _this4.updateAuth();
+	        return _this6.updateAuth();
 	      });
 	    }
 	  }, {
@@ -27233,12 +27260,12 @@
 	  }, {
 	    key: 'logIn',
 	    value: function logIn(userDetails) {
-	      var _this5 = this;
+	      var _this7 = this;
 	
 	      _superagent2.default.post('/api/login').send(userDetails).then(function () {
-	        _this5.updateAuth();
-	        _this5.getCurrentUserTrips();
-	        _this5.setState({
+	        _this7.updateAuth();
+	        _this7.getCurrentUserTrips();
+	        _this7.setState({
 	          myAccountView: false
 	        });
 	      });
@@ -27246,12 +27273,12 @@
 	  }, {
 	    key: 'signUp',
 	    value: function signUp(userDetails) {
-	      var _this6 = this;
+	      var _this8 = this;
 	
 	      _superagent2.default.post('/api/signup').send(userDetails).then(function () {
-	        _this6.updateAuth();
-	        _this6.getCurrentUserTrips();
-	        _this6.setState({
+	        _this8.updateAuth();
+	        _this8.getCurrentUserTrips();
+	        _this8.setState({
 	          myAccountView: false
 	        });
 	      });
@@ -27305,7 +27332,9 @@
 	          this.state.myAccountView ? _react2.default.createElement(_MyAccountView2.default, {
 	            myAccount: this.state.myAccountView,
 	            trips: this.state.trips,
-	            sendTrip: this.sendTrip
+	            sendTrip: this.sendTrip,
+	            flights: this.state.flights,
+	            sendFlights: this.sendFlights
 	          }) : _react2.default.createElement(_Homepage2.default, null),
 	          _react2.default.createElement('footer', null)
 	        );
@@ -29692,7 +29721,7 @@
 	
 	var _FlightsSearch2 = _interopRequireDefault(_FlightsSearch);
 	
-	var _HomePageView = __webpack_require__(257);
+	var _HomePageView = __webpack_require__(258);
 	
 	var _HomePageView2 = _interopRequireDefault(_HomePageView);
 	
@@ -29700,7 +29729,7 @@
 	
 	var _MyAccountView2 = _interopRequireDefault(_MyAccountView);
 	
-	var _ResultsView = __webpack_require__(258);
+	var _ResultsView = __webpack_require__(259);
 	
 	var _ResultsView2 = _interopRequireDefault(_ResultsView);
 	
@@ -30158,7 +30187,6 @@
 	      // if (this.props.moneyToSpend > (parseInt(totalFare) + parseInt(returnTotalFare))) {
 	
 	      var value = this.state.doors.map(function (door) {
-	        console.log(_this4.props.dateTo);
 	        if (door.legId !== "null") {
 	          return _react2.default.createElement(_FlightView2.default, {
 	            legId: door.legId,
@@ -30227,7 +30255,7 @@
 	
 	var _MyAccountView2 = _interopRequireDefault(_MyAccountView);
 	
-	var _FlightLogin = __webpack_require__(256);
+	var _FlightLogin = __webpack_require__(257);
 	
 	var _FlightLogin2 = _interopRequireDefault(_FlightLogin);
 	
@@ -30274,10 +30302,8 @@
 	      var _this2 = this;
 	
 	      this.handleClick();
-	      console.log(this.props.departureAirport, this.props.arrivalAirport, this.props.dateTo);
 	
 	      _superagent2.default.post('api/flights/' + this.props.departureAirport + '/' + this.props.arrivalAirport + '/' + this.props.dateTo).then(function (response) {
-	        console.log(response);
 	        var flights = response.body;
 	        _this2.setState({ flights: flights });
 	      }).catch(function () {
@@ -30390,6 +30416,10 @@
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
+	var _SavedFlights = __webpack_require__(256);
+	
+	var _SavedFlights2 = _interopRequireDefault(_SavedFlights);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30401,30 +30431,141 @@
 	var MyAccountView = function (_React$Component) {
 	  _inherits(MyAccountView, _React$Component);
 	
-	  function MyAccountView() {
+	  function MyAccountView(props) {
 	    _classCallCheck(this, MyAccountView);
 	
-	    return _possibleConstructorReturn(this, (MyAccountView.__proto__ || Object.getPrototypeOf(MyAccountView)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (MyAccountView.__proto__ || Object.getPrototypeOf(MyAccountView)).call(this, props));
+	
+	    _this.state = {
+	      doors: []
+	    };
+	    _this.getData = _this.getData.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(MyAccountView, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      _superagent2.default.get('api/flights/' + this.props.departureAirport + '/' + this.props.arrivalAirport + '/' + this.props.departureTime);
+	      this.getData();
+	    }
+	  }, {
+	    key: 'httpGetFlights',
+	    value: function httpGetFlights(travelFrom, destinationAirportCode, dateTo) {
+	      var _this2 = this;
+	
+	      var newData = [];
+	      var openFlights = [];
+	
+	      var _loop = function _loop(i) {
+	        var randomVariable = Math.floor(Math.random() * 519);
+	        var destinationAirportCode = _this2.state.airportDestinationArray[randomVariable];
+	        console.log(destinationAirportCode);
+	        var url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=' + travelFrom + '&arrivalAirport=' + destinationAirportCode + '&departureDate=' + dateTo + '&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
+	        _superagent2.default.get(url).then(function (response) {
+	          var budgetData = response.body.offers;
+	          if (budgetData) {
+	            var budget = Object.keys(budgetData).map(function (id) {
+	              var individualBudgetData = budgetData[id];
+	              var RealLegsId = individualBudgetData.legIds[0].toString();
+	              var totalFare = individualBudgetData.totalFare;
+	              var detailsURL = individualBudgetData.detailsUrl.toString();
+	              var flightData = response.body.legs;
+	              var money = _this2.props.moneyToSpend;
+	              if (flightData) {
+	                var flights = Object.keys(flightData).map(function (id) {
+	                  var individualFlightData = flightData[id];
+	                  var legId = individualFlightData.legId;
+	                  if (individualFlightData.segments.length == 1 && individualFlightData.segments[0].hasSeatMap === true && RealLegsId === legId) {
+	                    if (parseFloat(money) > parseFloat(totalFare)) {
+	                      var airlineName = individualFlightData.segments[0].airlineName;
+	                      var arrivalAirportLocation = individualFlightData.segments[0].arrivalAirportLocation;
+	                      var arrivalAirportCode = individualFlightData.segments[0].arrivalAirportCode;
+	                      var arrivalTime = individualFlightData.segments[0].arrivalTime;
+	                      var departureAirportCode = individualFlightData.segments[0].departureAirportCode;
+	                      var departureAirportLocation = individualFlightData.segments[0].departureAirportLocation;
+	                      var departureTime = individualFlightData.segments[0].departureTime;
+	                      var flightNumber = individualFlightData.segments[0].flightNumber;
+	                      openFlights.push({ legId: legId, airlineName: airlineName, arrivalAirportCode: arrivalAirportCode, arrivalAirportLocation: arrivalAirportLocation, arrivalTime: arrivalTime,
+	                        departureAirportCode: departureAirportCode, departureTime: departureTime, departureAirportLocation: departureAirportLocation, flightNumber: flightNumber, RealLegsId: RealLegsId,
+	                        totalFare: totalFare, detailsURL: detailsURL, destinationAirportCode: destinationAirportCode });
+	                      openFlights.sort(function (a, b) {
+	                        if (a.totalFare > b.totalFare) {
+	                          return 1;
+	                        }
+	                        if (a.totalFare < b.totalFare) {
+	                          return -1;
+	                        }if (a.totalFare = b.totalFare) {
+	                          return 0;
+	                        }
+	                      });
+	                    }
+	                  } else if (openFlights.length === 0) {
+	                    console.log("no flights");
+	                  }
+	                });
+	                _this2.setState({
+	                  doors: openFlights
+	                });
+	              }
+	            });
+	          }
+	        });
+	      };
+	
+	      for (var i = 0; i < 30; i++) {
+	        _loop(i);
+	      }
+	    }
+	  }, {
+	    key: 'getData',
+	    value: function getData() {
+	      this.props.flights.map(function (flight) {
+	        console.log(flight.body);
+	        travelFrom = flight.body.location;
+	        destinationAirportCode = flight.body.arrival;
+	        dateTo = flight.body.dateTo;
+	        httpGetFLights(travelFrom, destinationAirportCode, dateTo);
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this3 = this;
+	
+	      // <TripForm sendTrip={this.props.sendTrip} />
+	      // <TripList trips={this.props.trips} />
+	      var value = this.state.doors.map(function (door) {
+	        if (door.legId !== "null") {
+	          return _react2.default.createElement(FlightView, {
+	            legId: door.legId,
+	            airlineName: door.airlineName,
+	            arrivalAirport: door.arrivalAirportCode,
+	            arrivalLocation: door.arrivalAirportLocation,
+	            arrivalTime: door.arrivalTime,
+	            departureAirport: door.departureAirportCode,
+	            departureTime: door.departureTime,
+	            departureLocation: door.departureAirportLocation,
+	            flightNumber: door.flightNumber,
+	            RealLegsId: door.RealLegsId,
+	            totalFare: door.totalFare,
+	            detailsURL: door.detailsURL,
+	            returnFlight: _this3.httpGetReturnFlights,
+	            destinationAirportCode: door.departureAirportCode,
+	            dateTo: _this3.props.dateTo
+	          });
+	        } else {
+	          alert("Your price is way too high");
+	        }
+	      });
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'welcomeMessage' },
-	          'My Saved Trips'
+	          'My Saved Trips:'
 	        ),
-	        _react2.default.createElement(_TripForm2.default, { sendTrip: this.props.sendTrip }),
-	        _react2.default.createElement(_TripList2.default, { trips: this.props.trips })
+	        value
 	      );
 	    }
 	  }]);
@@ -30589,6 +30730,61 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _superagent = __webpack_require__(237);
+	
+	var _superagent2 = _interopRequireDefault(_superagent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var propTypes = {
+	  flights: _react2.default.PropTypes.array
+	};
+	
+	var SavedFlights = function (_React$Component) {
+	  _inherits(SavedFlights, _React$Component);
+	
+	  function SavedFlights() {
+	    _classCallCheck(this, SavedFlights);
+	
+	    return _possibleConstructorReturn(this, (SavedFlights.__proto__ || Object.getPrototypeOf(SavedFlights)).apply(this, arguments));
+	  }
+	
+	  _createClass(SavedFlights, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', null);
+	    }
+	  }]);
+	
+	  return SavedFlights;
+	}(_react2.default.Component);
+	
+	SavedFlights.propTypes = propTypes;
+	
+	exports.default = SavedFlights;
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
 	var _RegisterView = __webpack_require__(245);
 	
 	var _RegisterView2 = _interopRequireDefault(_RegisterView);
@@ -30690,7 +30886,7 @@
 	exports.default = FlightLogin;
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30747,7 +30943,7 @@
 	exports.default = HomePageView;
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

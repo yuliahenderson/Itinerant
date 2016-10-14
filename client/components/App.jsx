@@ -13,19 +13,40 @@ class App extends React.Component {
     super(props);
     this.state = {
       trips: [],
+      flights: [],
       myAccountView: false,
     };
     this.logIn = this.logIn.bind(this);
     this.signUp = this.signUp.bind(this);
     this.signOut = this.signOut.bind(this);
     this.sendTrip = this.sendTrip.bind(this);
+    this.sendFlights = this.sendFlights.bind(this);
     this.myAccount = this.myAccount.bind(this);
   }
   componentDidMount() {
     this.updateAuth();
     if (cookie.load('token')) {
+      this.getCurrentUserFlights();
       this.getCurrentUserTrips();
     }
+  }
+  getCurrentUserFlights() {
+    request.get('/api/flights')
+           .then((response) => {
+            console.log(response)
+             const flights = response.body;
+             this.setState({ flights });
+           })
+           .catch(() => {
+             this.updateAuth();
+           });
+  }
+    sendFlights({ body }) {
+    request.post('/api/flights')
+           .send({ body })
+           .then(() => {
+             this.getCurrentUserFlights();
+           });
   }
   getCurrentUserTrips() {
     request.get('/api/trips')
@@ -101,6 +122,8 @@ class App extends React.Component {
                     myAccount = {this.state.myAccountView}
                     trips = {this.state.trips}
                     sendTrip = {this.sendTrip }
+                    flights = {this.state.flights}
+                    sendFlights = {this.sendFlights}
             /> : <Homepage /> }
          <footer>
          </footer>
