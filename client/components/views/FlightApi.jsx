@@ -91,6 +91,7 @@ class FlightApi extends React.Component {
           if (flightData) {
           let flights = Object.keys(flightData).map((id) => {
               const individualFlightData = flightData[id];
+              console.log(individualFlightData)
               let legId=individualFlightData.legId;
               if (individualFlightData.segments.length == 1 &&
                   individualFlightData.segments[0].hasSeatMap === true &&
