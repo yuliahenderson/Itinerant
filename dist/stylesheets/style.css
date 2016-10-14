@@ -203,7 +203,7 @@ h1 {
 .destination {
   position: relative;
   top: 4em;
-  width: 600px;
+  width: 700px;
   left: 5.6em;
 }
 .ticketPrice {
@@ -230,6 +230,12 @@ h1 {
   font-size: 1.5em;
   margin-left: 1em;
 }
+#flightLogin{
+    width: 150px;
+    /* text-align: center; */
+    margin-left: 30%;
+    margin-top: 10%;
+  }
 footer {
   background-color: #D3F9D2;
   margin-top: 3em;
