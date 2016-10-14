@@ -3,19 +3,17 @@ const ExpediaDAO = require('../services/ExpediaDAO');
 class ExpediaController {
   static getAllOfCurrentUser(req, res) {
     ExpediaDAO.searchBy({
-      user_id: req.session.currentUser.id,
-      location: req.params.location,
-      arrival: req.params.arrival,
-      date: req.params.date }).then((trips) => {
-      res.status(200).json(trips);
+      user_id: req.session.currentUser.id }).then((flights) => {
+      res.status(200).json(flights);
     });
   }
   static create(req, res) {
+
     const expediaData = {
       user_id: req.session.currentUser.id,
       location: req.params.location,
       arrival: req.params.arrival,
-      date: req.params.date,
+      dateTo: req.params.dateTo,
     };
     ExpediaDAO.create(expediaData)
            .then((data) => res.status(200).json(data));
