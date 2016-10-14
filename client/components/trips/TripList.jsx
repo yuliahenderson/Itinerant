@@ -6,9 +6,9 @@ const propTypes = {
 
 class TripList extends React.Component {
   render() {
+   // {this.props.trips.map((trip) => trip.body).join(` & `)}
     return (
       <div>
-        {this.props.trips.map((trip) => trip.body).join(` & `)}
       </div>
     );
   }

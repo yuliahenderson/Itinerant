@@ -28,7 +28,7 @@ app.use('/api', authentication);
 app.use('/api', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/trips', tripRouter);
-app.use('/api/flights', expediaRouter);
+app.use('/api', expediaRouter);
 
 
 module.exports = app;

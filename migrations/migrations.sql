@@ -23,6 +23,6 @@ CREATE TABLE expedia (
   id SERIAL PRIMARY KEY,
   location VARCHAR NOT NULL,
   arrival  VARCHAR NOT NULL,
-  date VARCHAR NOT NULL,
+  dateTo VARCHAR NOT NULL,
   user_id INTEGER REFERENCES users (id)
 );

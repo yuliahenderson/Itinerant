@@ -1,1 +1,1 @@
-INSERT INTO expedia (location, arrival, date) VALUES($1, $2, $3) RETURNING *;
+INSERT INTO expedia (location, arrival, dateTo, user_id ) VALUES($1, $2, $3, $4) RETURNING *;
