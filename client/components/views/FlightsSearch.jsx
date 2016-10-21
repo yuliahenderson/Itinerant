@@ -80,7 +80,7 @@ componentWillReceiveProps(nextProps) {
               name="travelFrom"
               value={this.state.travelFrom}
               onChange={this.handleEditOfTravelFrom}
-              placeholder="WHERE ARE YOU TRAVELING FROM?"
+              placeholder="WHERE ARE YOU TRAVELLING FROM?"
             />
             <input
               type="currency"
