@@ -77,7 +77,7 @@ class FlightApi extends React.Component {
       let randomVariable = Math.floor(Math.random()*519);
       let destinationAirportCode = this.state.airportDestinationArray[randomVariable];
       console.log(destinationAirportCode)
-      const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92`;
+      const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=${process.env.APIKEY}`;
       request.get(url).then((response) => {
       const budgetData = response.body.offers;
       if (budgetData) {
@@ -134,7 +134,7 @@ class FlightApi extends React.Component {
     }
   }
   // httpGetReturnFlights() {
-  //   const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92`;
+  //   const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=${process.env.APIKEY}`;
   //   request.get(url).then((response) => {
   //     const budgetData = response.body.offers;
   //     let legsIdArrayReturn = [];
