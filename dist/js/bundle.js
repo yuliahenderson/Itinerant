@@ -30078,7 +30078,6 @@
 	      var _loop = function _loop(i) {
 	        var randomVariable = Math.floor(Math.random() * 519);
 	        var destinationAirportCode = _this2.state.airportDestinationArray[randomVariable];
-	        console.log(destinationAirportCode);
 	        var url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=' + _this2.props.travelFrom + '&arrivalAirport=' + destinationAirportCode + '&departureDate=' + _this2.props.dateTo + '&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
 	        _superagent2.default.get(url).then(function (response) {
 	          var budgetData = response.body.offers;
@@ -30140,9 +30139,9 @@
 	    value: function httpGetReturnFlights() {
 	      var _this3 = this;
 	
-	      var url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=' + this.props.travelFrom + '&arrivalAirport=' + destinationAirportCode + '&departureDate=' + this.props.dateTo + '&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
-	      _superagent2.default.get(url).then(function (response) {
-	        var budgetData = response.body.offers;
+	      var url = 'flight:this.props.travelFrom:destinationAirportCode:this.props.dateTo';
+	      console.log(url);
+	      _superagent2.default.get(url).then(function (budgetData) {
 	        var legsIdArrayReturn = [];
 	        var openFlightsReturn = [];
 	        if (budgetDataReturn) {
@@ -30615,8 +30614,13 @@
 	  _createClass(TripList, [{
 	    key: 'render',
 	    value: function render() {
-	      // {this.props.trips.map((trip) => trip.body).join(` & `)}
-	      return _react2.default.createElement('div', null);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.trips.map(function (trip) {
+	          return trip.body;
+	        }).join(' & ')
+	      );
 	    }
 	  }]);
 	
@@ -30855,25 +30859,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      // <div id="login-modal">
-	      // <div id="show-login">
-	      //  <div id="flightLogin">
-	      //   <LoginView
-	      //     openModal={this.openModalLogin}
-	      //   />
-	      //   <RegisterView
-	      //     openModal={this.openModalSignup}
-	      //   />
-	      //   { this.state.modalOpen ?
-	      //     <LoginViewModal
-	      //        closeModal={this.closeModal}
-	      //        logIn={this.props.logIn}
-	      //        signUp={this.props.signUp}
-	      //        buttonText={this.state.buttonText}
-	      //      /> : false }
-	      //      </div>
-	      //      </div>
-	      //    </div>
+	
 	      return _react2.default.createElement('div', null);
 	    }
 	  }]);

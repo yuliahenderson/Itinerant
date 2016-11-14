@@ -39,28 +39,28 @@ class FlightLogin extends Component {
  }
 
  render() {
-     // <div id="login-modal">
-     // <div id="show-login">
-     //  <div id="flightLogin">
-     //   <LoginView
-     //     openModal={this.openModalLogin}
-     //   />
-     //   <RegisterView
-     //     openModal={this.openModalSignup}
-     //   />
-     //   { this.state.modalOpen ?
-     //     <LoginViewModal
-     //        closeModal={this.closeModal}
-     //        logIn={this.props.logIn}
-     //        signUp={this.props.signUp}
-     //        buttonText={this.state.buttonText}
-     //      /> : false }
-     //      </div>
-     //      </div>
-     //    </div>
+
    return (
      <div>
-
+     {/* <div id="login-modal">
+     <div id="show-login">
+      <div id="flightLogin">
+       <LoginView
+         openModal={this.openModalLogin}
+       />
+       <RegisterView
+         openModal={this.openModalSignup}
+       />
+       { this.state.modalOpen ?
+         <LoginViewModal
+            closeModal={this.closeModal}
+            logIn={this.props.logIn}
+            signUp={this.props.signUp}
+            buttonText={this.state.buttonText}
+          /> : false }
+          </div>
+          </div>
+        </div> */}
      </div>
    );
  }

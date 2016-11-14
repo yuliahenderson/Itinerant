@@ -14,10 +14,9 @@ class ExpediaDAO {
     const key = Object.keys(keyValue)[0];
     const value = keyValue[key];
 
-    return db.map(sql.find, [key, value], (row) => new Flight(row));
+    return db.map(sql.find, [key, value], (row) => {      console.log(flights);
+new Flight(row)});
   }
 }
 
 module.exports = ExpediaDAO;
-
-
