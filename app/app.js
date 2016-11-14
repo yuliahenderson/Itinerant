@@ -32,9 +32,11 @@ app.use('/api', expediaRouter);
 app.use('/api/trips', tripRouter);
 
 app.get('/flight/:travelFrom/:destinationAirportCode/:dateTo', (request, response) => {
+  console.log('request')
   const flightBot = new Flight();
   flightBot.getFlight(request.params.travelFrom, request.params.destinationAirportCode, request.params.dateTo)
             .then((flightData) => {
+              console.log('flightData')
               response.status(200).send(flightData)
             });
 });

@@ -30139,7 +30139,7 @@
 	    value: function httpGetReturnFlights() {
 	      var _this3 = this;
 	
-	      var url = 'flight:this.props.travelFrom:destinationAirportCode:this.props.dateTo';
+	      var url = 'flight:' + this.props.travelFrom + ':' + destinationAirportCode + ':' + this.props.dateTo;
 	      console.log(url);
 	      _superagent2.default.get(url).then(function (budgetData) {
 	        var legsIdArrayReturn = [];
