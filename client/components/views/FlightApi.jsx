@@ -107,14 +107,15 @@ class FlightApi extends React.Component {
                 departureAirportCode, departureTime, departureAirportLocation, flightNumber, RealLegsId,
                 totalFare, detailsURL, destinationAirportCode})
                 openFlights.sort(function(a,b) {
-                  if(a.totalFare > b.totalFare) {
-                    return 1;
-                  }
-                  if (a.totalFare < b.totalFare) {
-                    return -1
-                  } if ( a.totalFare = b.totalFare) {
-                  return 0
-                  }
+                  // if(a.totalFare > b.totalFare) {
+                  //   return 1;
+                  // }
+                  // if (a.totalFare < b.totalFare) {
+                  //   return -1
+                  // } if ( a.totalFare = b.totalFare) {
+                  // return 0
+                  // }
+                  return (a.totalFare > b.totalFare) - (b.totalFare > a.totalFare)
                 })
                   }
                 }
@@ -131,6 +132,7 @@ class FlightApi extends React.Component {
     })
     }
   }
+
   httpGetReturnFlights() {
     const url = `flight\:${this.props.travelFrom}\:${destinationAirportCode}\:${this.props.dateTo}`;
     request.get(url).then((budgetData) => {
@@ -172,6 +174,7 @@ class FlightApi extends React.Component {
       }
     })
   }
+
   render() {
     // if (this.props.moneyToSpend > (parseInt(totalFare) + parseInt(returnTotalFare))) {
 
