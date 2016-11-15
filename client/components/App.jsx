@@ -33,7 +33,6 @@ class App extends React.Component {
   getCurrentUserFlights() {
     request.get('/api/flights')
            .then((response) => {
-            console.log(response)
              const flights = response.body;
              this.setState({ flights });
            })
@@ -145,8 +144,8 @@ class App extends React.Component {
          />
         <section id="about_us">
           <h1>WHY ITINERANT</h1>
-          <p className="text_about"> Can not decide on where to travel next? Tell us where you are and how much you got,
-          and we will tell you where you can go. </p>
+          <p className="text_about"> Can not decide on where to travel next? Tell us where you are and how much you've got to spend,
+          and we will tell you where you can go based on your budget. </p>
         </section>
         <footer>
         </footer>
