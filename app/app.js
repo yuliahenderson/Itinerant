@@ -10,7 +10,7 @@ const authentication = require('./middleware/authentication');
 const session = require('express-session');
 
 const app = express();
-const Flight = require('./Flight');
+const Flight = require('./Flight.js');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
