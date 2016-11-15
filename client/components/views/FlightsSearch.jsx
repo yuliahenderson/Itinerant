@@ -80,7 +80,7 @@ componentWillReceiveProps(nextProps) {
               name="travelFrom"
               value={this.state.travelFrom}
               onChange={this.handleEditOfTravelFrom}
-              placeholder="WHERE ARE YOU TRAVELLING FROM?"
+              placeholder="WHERE ARE YOU TRAVELING FROM?"
             />
             <input
               type="currency"
@@ -95,6 +95,7 @@ componentWillReceiveProps(nextProps) {
               name="dateTo"
               value={this.state.localDateTo}
               onChange={this.handleEditOfDateTo}
+              placeholder="Depart mm/dd/yyyy"
             />
             <input
               className="dates"
@@ -102,6 +103,7 @@ componentWillReceiveProps(nextProps) {
               name="dateBack"
               value={this.state.localDateBack}
               onChange={this.handleEditOfDateBack}
+              placeholder="Arrive mm/dd/yyyy"
             />
             <button
               className="search_button"

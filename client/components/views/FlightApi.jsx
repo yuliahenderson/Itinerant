@@ -76,9 +76,11 @@ class FlightApi extends React.Component {
       for(let i = 0; i < 30; i++) {
       let randomVariable = Math.floor(Math.random()*519);
       let destinationAirportCode = this.state.airportDestinationArray[randomVariable];
-      console.log(destinationAirportCode)
-      const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=Nct9buvD3X9DQVwv57a3vLAYCzdeqVEO`;
-      request.get(url).then((response) => {
+      request.get(`/flight/${this.props.dateTo}/${destinationAirportCode}/${this.props.travelFrom}`)
+      .then((response) => {
+
+      // const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=Nct9buvD3X9DQVwv57a3vLAYCzdeqVEO`;
+      // request.get(url).then((response) => {
       const budgetData = response.body.offers;
       if (budgetData) {
         let budget = Object.keys(budgetData).map((id) => {

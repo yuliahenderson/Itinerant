@@ -10,6 +10,8 @@ const authentication = require('./middleware/authentication');
 const session = require('express-session');
 
 const app = express();
+const Flight = require('./Flight');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -29,5 +31,13 @@ app.use('/api', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api', expediaRouter);
 app.use('/api/trips', tripRouter);
+
+app.get('/flight/:date/:location/:arrival', (request, response) => {
+ const flightBot = new Flight();
+ flightBot.getFlight( request.params.date, request.params.location, request.params.arrival)
+ .then((flightData) => {
+   response.status(200).send(flightData)
+   });
+});
 
 module.exports = app;
