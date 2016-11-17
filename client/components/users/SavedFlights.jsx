@@ -20,16 +20,17 @@ class SavedFlights extends React.Component {
   render() {
     return (
       <div>
-        {this.props.flights.map((flights) =>
-          <SavedFlightsView
-              key = {flights.key}
-              id = {flights.id}
-              location = {flights.location}
-              arrival = {flights.arrival}
-              dateto = {flights.dateto}
-              user_id = {flights.user_id}
-          />
-        )}
+      {
+        this.props.flights.map((flights) =>
+        <SavedFlightsView
+            key = {flights.key}
+            id = {flights.id}
+            location = {flights.location}
+            arrival = {flights.arrival}
+            dateto = {flights.dateto}
+            user_id = {flights.user_id}
+        />
+      )}
       </div>
     );
   }

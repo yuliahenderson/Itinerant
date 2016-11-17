@@ -7,6 +7,7 @@ const propTypes = {
   children: React.PropTypes.element,
   signUp:  React.PropTypes.func,
   logIn: React.PropTypes.func,
+  flights: React.PropTypes.array,
 }
 
 class Homepage extends React.Component {
@@ -44,7 +45,8 @@ render() {
       {this.state.MyAccountView ?
         <MyAccount
           handleHomePageView = {this.handleHomePageView}
-          auth = {this.props.updateAuth}
+          updateAuth = {this.props.updateAuth}
+          flights = {this.props.flights}
         /> : false}
     </div>
   );
