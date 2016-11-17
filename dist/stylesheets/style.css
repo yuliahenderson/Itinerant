@@ -240,3 +240,12 @@ footer {
   margin-top: 3em;
   height: 100px;
 }
+.btnReturnTrip {
+  position: relative;
+  top: 3.01em;
+  width: 200px;
+  left: 7.6em;
+  padding: 0.7em;
+  font-size: 1em;
+  background-color: #D3F9D2;
+}

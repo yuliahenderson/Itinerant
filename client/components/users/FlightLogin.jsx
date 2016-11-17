@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import RegisterView from './RegisterView.jsx';
-import LoginView from './LoginView.jsx';
-import LoginViewModal from './LoginViewModal.jsx';
+import RegisterView from '../views/RegisterView.jsx';
+import LoginView from '../views/LoginView.jsx';
+import LoginModal from '../views/LoginModal.jsx';
 
 const propTypes = {
-  logIn: React.PropTypes.func,
-  signUp: React.PropTypes.func,
+  logIn: React.PropTypes.func.isRequired,
+  signUp: React.PropTypes.func.isRequired,
+  loginCheck: React.PropTypes.func,
 };
 
 class FlightLogin extends Component {
@@ -34,36 +35,32 @@ class FlightLogin extends Component {
  closeModal() {
    this.setState({
      modalOpen: false,
-     buttonText: 'logIn',
+     buttonText: 'login',
    });
+   this.props.loginCheck();
  }
 
  render() {
-
    return (
      <div>
-     {/* <div id="login-modal">
-     <div id="show-login">
-      <div id="flightLogin">
-       <LoginView
-         openModal={this.openModalLogin}
-       />
-       <RegisterView
-         openModal={this.openModalSignup}
-       />
-       { this.state.modalOpen ?
-         <LoginViewModal
-            closeModal={this.closeModal}
-            logIn={this.props.logIn}
-            signUp={this.props.signUp}
-            buttonText={this.state.buttonText}
-          /> : false }
+       <div id="login-modal">
+         <div id="show-login">
+           {this.state.modalOpen ?
+              <LoginModal
+                closeModal={this.closeModal}
+                logIn={this.props.logIn}
+                signUp={this.props.signUp}
+                buttonText={this.state.buttonText}
+            /> : false }
+            <div id="flightLogin">
+              <LoginView openModal={this.openModalLogin}  />
+              <RegisterView openModal={this.openModalSignup} />
+            </div>
           </div>
-          </div>
-        </div> */}
+        </div>
      </div>
    );
- }
+  }
 }
 
 FlightLogin.propTypes = propTypes;

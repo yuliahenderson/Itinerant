@@ -1,5 +1,5 @@
 import React from 'react';
-import UserForm from './UserForm.jsx';
+import UserForm from '../users/UserForm.jsx';
 
 const propTypes = {
  closeModal: React.PropTypes.func,
@@ -8,7 +8,7 @@ const propTypes = {
  buttonText: React.PropTypes.string.isRequired,
 };
 
-const LoginViewModal = ({ closeModal, logIn, signUp, buttonText }) => {
+const LoginModal = ({ closeModal, logIn, signUp, buttonText }) => {
  return (
   <div>
    <div id="login-modal">
@@ -20,6 +20,6 @@ const LoginViewModal = ({ closeModal, logIn, signUp, buttonText }) => {
  );
 };
 
-LoginViewModal.propTypes = propTypes;
+LoginModal.propTypes = propTypes;
 
-export default LoginViewModal;
+export default LoginModal;

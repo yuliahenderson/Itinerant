@@ -12,17 +12,10 @@ CREATE TABLE users (
   password VARCHAR NOT NULL
 );
 
-CREATE TABLE trips (
-  id SERIAL PRIMARY KEY,
-  body VARCHAR NOT NULL,
-  user_id INTEGER REFERENCES users (id)
-);
-
-
 CREATE TABLE expedia (
   id SERIAL PRIMARY KEY,
   location VARCHAR NOT NULL,
   arrival  VARCHAR NOT NULL,
-  dateTo VARCHAR NOT NULL,
+  dateto VARCHAR NOT NULL,
   user_id INTEGER REFERENCES users (id)
 );

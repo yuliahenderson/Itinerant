@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const userRouter = require('./routes/userRouter');
-const tripRouter = require('./routes/tripRouter');
 const expediaRouter = require('./routes/expediaRouter');
 const authRouter = require('./routes/authRouter');
 const authentication = require('./middleware/authentication');
@@ -29,8 +28,7 @@ app.use(morgan('dev'));
 app.use('/api', authentication);
 app.use('/api', authRouter);
 app.use('/api/users', userRouter);
-app.use('/api', expediaRouter);
-app.use('/api/trips', tripRouter);
+app.use('/api/flights', expediaRouter);
 
 app.get('/flight/:date/:location/:arrival', (request, response) => {
  const flightBot = new Flight();

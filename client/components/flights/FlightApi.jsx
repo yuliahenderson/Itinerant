@@ -1,20 +1,23 @@
 import React from 'react';
 import request from 'superagent';
-import FlightView from './FlightView.jsx';
+import FlightView from '../views/FlightView.jsx';
 
 const propTypes = {
   handleResultsView: React.PropTypes.func,
   travelFrom: React.PropTypes.string,
   moneyToSpend: React.PropTypes.currency,
-  dateTo: React.PropTypes.string,
+  dateto: React.PropTypes.string,
   dateBack: React.PropTypes.string,
   handleSearch: React.PropTypes.func,
+  signUp: React.PropTypes.func.isRequired,
+  logIn: React.PropTypes.func.isRequired,
 };
 class FlightApi extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       doors: [],
+      returnFlight: false,
       airportDestinationArray: ["ANC", "BRW", "BET", "BTT", "CDV", "DLG", "DUT", "EEK",
       "FAI", "FYU", "Big", "HOM", "JNU", "ENA", "AKN", "ADQ", "OME", "SDP", "SIT",
       "SGY", "OOK", "UNK", "VDZ", "WRG", "YAK", "BHM", "DHN", "HSV", "MOB", "MGM",
@@ -63,27 +66,84 @@ class FlightApi extends React.Component {
       "CRW", "CKB", "LWB", "HTS", "MGW", "PKB", "CPR", "CYS", "COD", "GCC", "JAC",
       "LAR", "RIW", "RKS", "SHR", "WRL", "CHI", "CHI", "MWH", "NYC", "OXR", "SOP",
       "PNC", "TOP", "WAS", "YMQ", "YTO"]
-
     };
+    this.httpGetReturnFlights = this.httpGetReturnFlights.bind(this);
   }
   componentDidMount() {
     this.httpGetFlights();
   }
-
   httpGetFlights() {
       let newData = [];
       let openFlights = [];
       for(let i = 0; i < 30; i++) {
-      let randomVariable = Math.floor(Math.random()*519);
-      let destinationAirportCode = this.state.airportDestinationArray[randomVariable];
-      request.get(`/flight/${this.props.dateTo}/${destinationAirportCode}/${this.props.travelFrom}`)
-      .then((response) => {
-
-      // const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=Nct9buvD3X9DQVwv57a3vLAYCzdeqVEO`;
-      // request.get(url).then((response) => {
-      const budgetData = response.body.offers;
-      if (budgetData) {
-        let budget = Object.keys(budgetData).map((id) => {
+        let randomVariable = Math.floor(Math.random()*519);
+        let destinationAirportCode = this.state.airportDestinationArray[randomVariable];
+        request.get(`/flight/${this.props.dateto}/${this.props.travelFrom}/${destinationAirportCode}`)
+        .then((response) => {
+        const budgetData = response.body.offers;
+        if (budgetData) {
+          let budget = Object.keys(budgetData).map((id) => {
+            const individualBudgetData = budgetData[id];
+            let RealLegsId = individualBudgetData.legIds[0].toString();
+            let totalFare = individualBudgetData.totalFare
+            let detailsURL = individualBudgetData.detailsUrl.toString();
+            const flightData = response.body.legs;
+            let money = this.props.moneyToSpend
+            if (flightData) {
+            let flights = Object.keys(flightData).map((id) => {
+                const individualFlightData = flightData[id];
+                let legId=individualFlightData.legId;
+                if (individualFlightData.segments.length == 1 &&
+                    individualFlightData.segments[0].hasSeatMap === true &&
+                    RealLegsId === legId) {
+                      if(parseFloat(money) > parseFloat(totalFare)) {
+                      let airlineName = individualFlightData.segments[0].airlineName;
+                      let arrivalAirportLocation = individualFlightData.segments[0].arrivalAirportLocation;
+                      let arrivalAirportCode = individualFlightData.segments[0].arrivalAirportCode;
+                      let arrivalTime = individualFlightData.segments[0].arrivalTime;
+                      let departureAirportCode = individualFlightData.segments[0].departureAirportCode;
+                      let departureAirportLocation = individualFlightData.segments[0].departureAirportLocation;
+                      let departureTime = individualFlightData.segments[0].departureTime;
+                      let flightNumber = individualFlightData.segments[0].flightNumber;
+                      openFlights.push({legId, airlineName, arrivalAirportCode, arrivalAirportLocation, arrivalTime,
+                      departureAirportCode, departureTime, departureAirportLocation, flightNumber, RealLegsId,
+                      totalFare, detailsURL, destinationAirportCode})
+                      openFlights.sort(function(a,b) {
+                        if(a.totalFare > b.totalFare) {
+                          return 1;
+                        }
+                        if (a.totalFare < b.totalFare) {
+                          return -1
+                        } if ( a.totalFare = b.totalFare) {
+                        return 0
+                        }
+                        // return ((a.totalFare > b.totalFare) - (b.totalFare > a.totalFare));
+                      })
+                    }
+                  }
+                  else if (openFlights.length === 0) {
+                    console.log("no flights")
+                  }
+              });
+              this.setState({
+                doors: openFlights,
+                returnFlight: false,
+              });
+            }
+          });
+        }
+      })
+    }
+  }
+  httpGetReturnFlights(dateto, travelFrom, destinationAirportCode) {
+      console.log(dateto, travelFrom, destinationAirportCode)
+      let newData = [];
+      let openFlights = [];
+        request.get(`/flight/${dateto}/${travelFrom}/${destinationAirportCode}`)
+        .then((response) => {
+        const budgetData = response.body.offers;
+        if (budgetData) {
+          let budget = Object.keys(budgetData).map((id) => {
           const individualBudgetData = budgetData[id];
           let RealLegsId = individualBudgetData.legIds[0].toString();
           let totalFare = individualBudgetData.totalFare
@@ -98,85 +158,42 @@ class FlightApi extends React.Component {
                   individualFlightData.segments[0].hasSeatMap === true &&
                   RealLegsId === legId) {
                     if(parseFloat(money) > parseFloat(totalFare)) {
-                let airlineName = individualFlightData.segments[0].airlineName;
-                let arrivalAirportLocation = individualFlightData.segments[0].arrivalAirportLocation;
-                let arrivalAirportCode = individualFlightData.segments[0].arrivalAirportCode;
-                let arrivalTime = individualFlightData.segments[0].arrivalTime;
-                let departureAirportCode = individualFlightData.segments[0].departureAirportCode;
-                let departureAirportLocation = individualFlightData.segments[0].departureAirportLocation;
-                let departureTime = individualFlightData.segments[0].departureTime;
-                let flightNumber = individualFlightData.segments[0].flightNumber;
-                openFlights.push({legId, airlineName, arrivalAirportCode, arrivalAirportLocation, arrivalTime,
-                departureAirportCode, departureTime, departureAirportLocation, flightNumber, RealLegsId,
-                totalFare, detailsURL, destinationAirportCode})
-                openFlights.sort(function(a,b) {
-                  // if(a.totalFare > b.totalFare) {
-                  //   return 1;
-                  // }
-                  // if (a.totalFare < b.totalFare) {
-                  //   return -1
-                  // } if ( a.totalFare = b.totalFare) {
-                  // return 0
-                  // }
-                  return (a.totalFare > b.totalFare) - (b.totalFare > a.totalFare)
-                })
+                    let airlineName = individualFlightData.segments[0].airlineName;
+                    let arrivalAirportLocation = individualFlightData.segments[0].arrivalAirportLocation;
+                    let arrivalAirportCode = individualFlightData.segments[0].arrivalAirportCode;
+                    let arrivalTime = individualFlightData.segments[0].arrivalTime;
+                    let departureAirportCode = individualFlightData.segments[0].departureAirportCode;
+                    let departureAirportLocation = individualFlightData.segments[0].departureAirportLocation;
+                    let departureTime = individualFlightData.segments[0].departureTime;
+                    let flightNumber = individualFlightData.segments[0].flightNumber;
+                    openFlights.push({legId, airlineName, arrivalAirportCode, arrivalAirportLocation, arrivalTime,
+                    departureAirportCode, departureTime, departureAirportLocation, flightNumber, RealLegsId,
+                    totalFare, detailsURL, destinationAirportCode})
+                    openFlights.sort(function(a,b) {
+                      if(a.totalFare > b.totalFare) {
+                        return 1;
+                      }
+                      if (a.totalFare < b.totalFare) {
+                        return -1
+                      } if ( a.totalFare = b.totalFare) {
+                      return 0
+                      }
+                      // return ((a.totalFare > b.totalFare) - (b.totalFare > a.totalFare));
+                    })
                   }
                 }
-                else if (openFlights.length === 0) {
-                  console.log("no flights")
-                  }
             });
             this.setState({
               doors: openFlights,
+              returnFlight: true,
             });
           }
         });
+      } else {
+        alert('No results found.')
       }
     })
-    }
   }
-  // httpGetReturnFlights() {
-  //   const url = `http://terminal2.expedia.com/x/mflights/search?departureAirport=${this.props.travelFrom}&arrivalAirport=${destinationAirportCode}&departureDate=${this.props.dateTo}&apikey=${process.env.APIKEY}`;
-  //   request.get(url).then((response) => {
-  //     const budgetData = response.body.offers;
-  //     let legsIdArrayReturn = [];
-  //     let openFlightsReturn = [];
-  //     if (budgetDataReturn) {
-  //       let budgetReturn = Object.keys(budgetData).map((id) => {
-  //         const individualBudgetData = budgetData[id];
-  //         let ReturnRealLegsId = individualBudgetData.legIds[0].toString();
-  //         let ReturnTotalFare = individualBudgetData.totalFare.toString();
-  //         let ReturnDetailsURL = individualBudgetData.detailsUrl.toString();
-  //         const flightData = response.body.legs;
-  //         if (flightData) {
-  //         let flights = Object.keys(flightData).map((id) => {
-  //             const individualFlightDataReturn = flightData[id];
-  //             let legIdReturn=individualFlightData.legId;
-  //             if (individualFlightData.segments.length == 1 &&
-  //                 individualFlightData.segments[0].hasSeatMap === true &&
-  //                 ReturnRealLegsId === legIdReturn) {
-  //               let airlineNameReturn = individualFlightData.segments[0].airlineName;
-  //               let arrivalAirportCodeReturn = individualFlightData.segments[0].arrivalAirportCode;
-  //               let arrivalAirportLocationReturn = individualFlightData.segments[0].arrivalAirportLocation;
-  //               let arrivalTimeReturn = individualFlightData.segments[0].arrivalTime;
-  //               let departureAirportCodeReturn = individualFlightData.segments[0].departureAirportCode;
-  //               let departureAirportLocationReturn = individualFlightData.segments[0].departureAirportLocation;
-  //               let departureTimeReturn = individualFlightData.segments[0].departureTime;
-  //               let flightNumberReturn = individualFlightData.segments[0].flightNumber;
-  //               openFlightsReturn.push({legIdReturn, airlineNameReturn, arrivalAirportCodeReturn, arrivalAirportLocationReturn, arrivalTimeReturn,
-  //               departureAirportCodeReturn, departureTimeReturn, departureAirportLocationReturn, flightNumberReturn, RealLegsIdReturn,
-  //               totalFareReturn, detailsURLReturn});
-  //             }
-  //           });
-  //           console.log(openFlightsReturn);
-  //           this.setState({
-  //             doorsReturn: openFlightsReturn,
-  //           });
-  //         }
-  //       });
-  //     }
-  //   })
-  // }
   render() {
     // if (this.props.moneyToSpend > (parseInt(totalFare) + parseInt(returnTotalFare))) {
 
@@ -196,13 +213,17 @@ class FlightApi extends React.Component {
                    RealLegsId = {door.RealLegsId}
                    totalFare = {door.totalFare}
                    detailsURL = {door.detailsURL}
-                   returnFlight = {this.httpGetReturnFlights}
                    destinationAirportCode = {door.departureAirportCode}
-                   dateTo = {this.props.dateTo}
+                   dateto = {this.props.dateto}
+                   dateBack = {this.props.dateBack}
+                   httpGetReturnFlights = {this.httpGetReturnFlights}
+                   returnFlight = {this.state.returnFlight}
+                   logIn = {this.props.logIn}
+                   signUp = {this.props.signUp}
                 />
               )
           } else {
-            alert("Your price is way too high")
+            alert("We could not find flights in your price range.")
           }
         });
     return(
