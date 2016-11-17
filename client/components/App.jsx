@@ -45,7 +45,6 @@ class App extends React.Component {
           .send(userDetails)
          .then(() => {
            this.updateAuth();
-           this.getCurrentUserFlights();
            this.setState({
              myAccountView: false,
            })
@@ -56,7 +55,6 @@ class App extends React.Component {
           .send(userDetails)
           .then(() => {
             this.updateAuth();
-            this.getCurrentUserTrips();
             this.setState({
               myAccountView: false,
             })
