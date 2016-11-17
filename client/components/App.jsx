@@ -13,6 +13,7 @@ class App extends React.Component {
       myAccountView: false,
     };
     this.updateAuth = this.updateAuth.bind(this);
+    this.getCurrentUserFlights = this.getCurrentUserFlights.bind(this);
     this.logIn = this.logIn.bind(this);
     this.signUp = this.signUp.bind(this);
     this.signOut = this.signOut.bind(this);
@@ -29,22 +30,22 @@ class App extends React.Component {
       token: cookie.load('token'),
     });
   }
-  // getCurrentUserFlights() {
-  //   request.get('/api/flights')
-  //          .then((response) => {
-  //            const flights = response.body;
-  //            this.setState({ flights });
-  //            console.log(response)
-  //          })
-  //          .catch(() => {
-  //            this.updateAuth();
-  //          });
-  // }
+  getCurrentUserFlights() {
+    request.get('/api/flights')
+           .then((response) => {
+             const flights = response.body;
+             this.setState({ flights });
+           })
+           .catch(() => {
+             this.updateAuth();
+           });
+  }
   logIn(userDetails) {
     request.post('/api/login')
           .send(userDetails)
          .then(() => {
            this.updateAuth();
+           this.getCurrentUserFlights();
            this.setState({
              myAccountView: false,
            })
@@ -55,6 +56,7 @@ class App extends React.Component {
           .send(userDetails)
           .then(() => {
             this.updateAuth();
+            this.getCurrentUserTrips();
             this.setState({
               myAccountView: false,
             })
@@ -90,7 +92,13 @@ class App extends React.Component {
                     myAccount = {this.state.myAccountView}
                     flights = {this.state.flights}
                     updateAuth={this.updateAuth}
-            /> : <Homepage /> }
+            /> :
+            <Homepage
+              myAccount = {this.state.myAccount}
+              signUp={this.signUp}
+              logIn={this.logIn}
+              flights={this.state.flights}
+            /> }
          <footer>
          </footer>
          </div>
@@ -108,6 +116,7 @@ class App extends React.Component {
           myAccount = {this.state.myAccount}
           signUp={this.signUp}
           logIn={this.logIn}
+          flights={this.state.flights}
          />
         <section id="about_us">
           <h1>WHY ITINERANT</h1>
@@ -122,7 +131,6 @@ class App extends React.Component {
     return (
       <div>
         {userDisplayElement}
-        {console.log(this.state.flights)}
       </div>
     );
   }

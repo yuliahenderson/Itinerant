@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const propTypes = {
   key: React.PropTypes.number,
@@ -9,15 +9,15 @@ const propTypes = {
   user_id: React.PropTypes.number,
 }
 
-class SavedFlightsView {
+class SavedFlightsView extends React.Component {
   render() {
     return(
       <div>
-      {this.props.key} <br />
-      {this.props.id} <br />
+      <p>
+      {this.props.location} <br />
       {this.props.arrival} <br />
       {this.props.dateto} <br />
-      {this.props.user_id} <br /> <br />
+      </p>
 
       </div>
     )

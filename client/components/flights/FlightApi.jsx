@@ -176,7 +176,7 @@ class FlightApi extends React.Component {
                       if (a.totalFare < b.totalFare) {
                         return -1
                       } if ( a.totalFare = b.totalFare) {
-                      return 0
+                        return 0
                       }
                       // return ((a.totalFare > b.totalFare) - (b.totalFare > a.totalFare));
                     })

@@ -5,7 +5,6 @@ class ExpediaController {
     ExpediaDAO.searchBy({
       user_id: req.session.currentUser.id
     }).then((flight) => {
-      console.log('flights ', flight.map((data) => console.log(data.body)));
       res.status(200).json(flight);
     });
   }
