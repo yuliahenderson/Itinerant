@@ -5,7 +5,7 @@ const propTypes = {
   handleResultsView: React.PropTypes.func,
   travelFrom: React.PropTypes.string,
   moneyToSpend: React.PropTypes.number,
-  dateTo: React.PropTypes.string,
+  dateto: React.PropTypes.string,
   dateBack: React.PropTypes.string,
 };
 
@@ -15,7 +15,7 @@ class FlightsSearch extends React.Component {
     this.state = {
       localTravelFrom: this.props.travelFrom || '',
       localMoneyToSpend: this.props.moneyToSpend || '',
-      localDateTo: this.props.dateTo || '',
+      localDateTo: this.props.dateto || '',
       localDateBack: this.props.dateBack || '',
       linkToSearch: false,
     };
@@ -29,7 +29,7 @@ componentWillReceiveProps(nextProps) {
   this.setState({
     localTravelFrom: nextProps.travelFrom || '',
     localMoneyToSpend: nextProps.moneyToSpend || '',
-    localDateTo: nextProps.dateTo || '',
+    localDateTo: nextProps.dateto || '',
     localDateBack: nextProps.dateBack || '',
   });
  }
@@ -70,8 +70,10 @@ componentWillReceiveProps(nextProps) {
             handleResultsView = {this.props.handleResultsView}
             travelFrom = {this.state.localTravelFrom}
             moneyToSpend = {this.state.localMoneyToSpend}
-            dateTo = {this.state.localDateTo}
+            dateto = {this.state.localDateTo}
             dateBack = {this.state.localDateBack}
+            signUp={this.props.signUp}
+            logIn={this.props.logIn}
         /> :
         <div id="main">
           <section id="input_fields">
@@ -92,7 +94,7 @@ componentWillReceiveProps(nextProps) {
             <input
               className="dates"
               type="date"
-              name="dateTo"
+              name="dateto"
               value={this.state.localDateTo}
               onChange={this.handleEditOfDateTo}
               placeholder="Depart mm/dd/yyyy"

@@ -49,7 +49,7 @@ class UserForm extends React.Component {
             value={this.state.password}
             placeholder="password"
             onChange={this.handleInputChange}
-          />
+          /><br />
           <input id="submit_button" type="submit" value="SUBMIT" />
         </form>
       </div>

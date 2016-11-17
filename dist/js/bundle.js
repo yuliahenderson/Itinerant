@@ -29318,9 +29318,9 @@
 	
 	var _LoginView2 = _interopRequireDefault(_LoginView);
 	
-	var _LoginViewModal = __webpack_require__(246);
+	var _LoginModal = __webpack_require__(246);
 	
-	var _LoginViewModal2 = _interopRequireDefault(_LoginViewModal);
+	var _LoginModal2 = _interopRequireDefault(_LoginModal);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29389,7 +29389,7 @@
 	        _react2.default.createElement(_RegisterView2.default, {
 	          openModal: this.openModalSignup
 	        }),
-	        this.state.modalOpen ? _react2.default.createElement(_LoginViewModal2.default, {
+	        this.state.modalOpen ? _react2.default.createElement(_LoginModal2.default, {
 	          closeModal: this.closeModal,
 	          logIn: this.props.logIn,
 	          signUp: this.props.signUp,
@@ -29422,9 +29422,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _LoginViewModal = __webpack_require__(246);
+	var _LoginModal = __webpack_require__(246);
 	
-	var _LoginViewModal2 = _interopRequireDefault(_LoginViewModal);
+	var _LoginModal2 = _interopRequireDefault(_LoginModal);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29501,7 +29501,7 @@
 	  buttonText: _react2.default.PropTypes.string.isRequired
 	};
 	
-	var LoginViewModal = function LoginViewModal(_ref) {
+	var LoginModal = function LoginModal(_ref) {
 	  var closeModal = _ref.closeModal;
 	  var logIn = _ref.logIn;
 	  var signUp = _ref.signUp;
@@ -29522,9 +29522,9 @@
 	  );
 	};
 	
-	LoginViewModal.propTypes = propTypes;
+	LoginModal.propTypes = propTypes;
 	
-	exports.default = LoginViewModal;
+	exports.default = LoginModal;
 
 /***/ },
 /* 247 */
@@ -29650,9 +29650,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _LoginViewModal = __webpack_require__(246);
+	var _LoginModal = __webpack_require__(246);
 	
-	var _LoginViewModal2 = _interopRequireDefault(_LoginViewModal);
+	var _LoginModal2 = _interopRequireDefault(_LoginModal);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29863,7 +29863,7 @@
 	  handleResultsView: _react2.default.PropTypes.func,
 	  travelFrom: _react2.default.PropTypes.string,
 	  moneyToSpend: _react2.default.PropTypes.number,
-	  dateTo: _react2.default.PropTypes.string,
+	  dateto: _react2.default.PropTypes.string,
 	  dateBack: _react2.default.PropTypes.string
 	};
 	
@@ -29878,7 +29878,7 @@
 	    _this.state = {
 	      localTravelFrom: _this.props.travelFrom || '',
 	      localMoneyToSpend: _this.props.moneyToSpend || '',
-	      localDateTo: _this.props.dateTo || '',
+	      localDateTo: _this.props.dateto || '',
 	      localDateBack: _this.props.dateBack || '',
 	      linkToSearch: false
 	    };
@@ -29896,7 +29896,7 @@
 	      this.setState({
 	        localTravelFrom: nextProps.travelFrom || '',
 	        localMoneyToSpend: nextProps.moneyToSpend || '',
-	        localDateTo: nextProps.dateTo || '',
+	        localDateTo: nextProps.dateto || '',
 	        localDateBack: nextProps.dateBack || ''
 	      });
 	    }
@@ -29949,7 +29949,7 @@
 	          handleResultsView: this.props.handleResultsView,
 	          travelFrom: this.state.localTravelFrom,
 	          moneyToSpend: this.state.localMoneyToSpend,
-	          dateTo: this.state.localDateTo,
+	          dateto: this.state.localDateTo,
 	          dateBack: this.state.localDateBack
 	        }) : _react2.default.createElement(
 	          'div',
@@ -29974,7 +29974,7 @@
 	            _react2.default.createElement('input', {
 	              className: 'dates',
 	              type: 'date',
-	              name: 'dateTo',
+	              name: 'dateto',
 	              value: this.state.localDateTo,
 	              onChange: this.handleEditOfDateTo
 	            }),
@@ -30041,7 +30041,7 @@
 	  handleResultsView: _react2.default.PropTypes.func,
 	  travelFrom: _react2.default.PropTypes.string,
 	  moneyToSpend: _react2.default.PropTypes.currency,
-	  dateTo: _react2.default.PropTypes.string,
+	  dateto: _react2.default.PropTypes.string,
 	  dateBack: _react2.default.PropTypes.string,
 	  handleSearch: _react2.default.PropTypes.func
 	};
@@ -30078,7 +30078,7 @@
 	      var _loop = function _loop(i) {
 	        var randomVariable = Math.floor(Math.random() * 519);
 	        var destinationAirportCode = _this2.state.airportDestinationArray[randomVariable];
-	        var url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=' + _this2.props.travelFrom + '&arrivalAirport=' + destinationAirportCode + '&departureDate=' + _this2.props.dateTo + '&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
+	        var url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=' + _this2.props.travelFrom + '&arrivalAirport=' + destinationAirportCode + '&departureDate=' + _this2.props.dateto + '&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
 	        _superagent2.default.get(url).then(function (response) {
 	          var budgetData = response.body.offers;
 	          if (budgetData) {
@@ -30139,7 +30139,7 @@
 	    value: function httpGetReturnFlights() {
 	      var _this3 = this;
 	
-	      var url = 'flight:' + this.props.travelFrom + ':' + destinationAirportCode + ':' + this.props.dateTo;
+	      var url = 'flight:' + this.props.travelFrom + ':' + destinationAirportCode + ':' + this.props.dateto;
 	      console.log(url);
 	      _superagent2.default.get(url).then(function (budgetData) {
 	        var legsIdArrayReturn = [];
@@ -30202,7 +30202,7 @@
 	            detailsURL: door.detailsURL,
 	            returnFlight: _this4.httpGetReturnFlights,
 	            destinationAirportCode: door.departureAirportCode,
-	            dateTo: _this4.props.dateTo
+	            dateto: _this4.props.dateto
 	          });
 	        } else {
 	          alert("Your price is way too high");
@@ -30302,7 +30302,7 @@
 	
 	      this.handleClick();
 	
-	      _superagent2.default.post('api/flights/' + this.props.departureAirport + '/' + this.props.arrivalAirport + '/' + this.props.dateTo).then(function (response) {
+	      _superagent2.default.post('api/flights/' + this.props.departureAirport + '/' + this.props.arrivalAirport + '/' + this.props.dateto).then(function (response) {
 	        var flights = response.body;
 	        _this2.setState({ flights: flights });
 	      }).catch(function () {
@@ -30449,7 +30449,7 @@
 	    }
 	  }, {
 	    key: 'httpGetFlights',
-	    value: function httpGetFlights(travelFrom, destinationAirportCode, dateTo) {
+	    value: function httpGetFlights(travelFrom, destinationAirportCode, dateto) {
 	      var _this2 = this;
 	
 	      var newData = [];
@@ -30459,7 +30459,7 @@
 	        var randomVariable = Math.floor(Math.random() * 519);
 	        var destinationAirportCode = _this2.state.airportDestinationArray[randomVariable];
 	        console.log(destinationAirportCode);
-	        var url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=' + travelFrom + '&arrivalAirport=' + destinationAirportCode + '&departureDate=' + dateTo + '&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
+	        var url = 'http://terminal2.expedia.com/x/mflights/search?departureAirport=' + travelFrom + '&arrivalAirport=' + destinationAirportCode + '&departureDate=' + dateto + '&apikey=X4ccWU6YHcmRcc8AowPNxAGgVA8QaZ92';
 	        _superagent2.default.get(url).then(function (response) {
 	          var budgetData = response.body.offers;
 	          if (budgetData) {
@@ -30522,8 +30522,8 @@
 	        console.log(flight.body);
 	        travelFrom = flight.body.location;
 	        destinationAirportCode = flight.body.arrival;
-	        dateTo = flight.body.dateTo;
-	        httpGetFLights(travelFrom, destinationAirportCode, dateTo);
+	        dateto = flight.body.dateto;
+	        httpGetFLights(travelFrom, destinationAirportCode, dateto);
 	      });
 	    }
 	  }, {
@@ -30550,7 +30550,7 @@
 	            detailsURL: door.detailsURL,
 	            returnFlight: _this3.httpGetReturnFlights,
 	            destinationAirportCode: door.departureAirportCode,
-	            dateTo: _this3.props.dateTo
+	            dateto: _this3.props.dateto
 	          });
 	        } else {
 	          alert("Your price is way too high");
@@ -30797,9 +30797,9 @@
 	
 	var _LoginView2 = _interopRequireDefault(_LoginView);
 	
-	var _LoginViewModal = __webpack_require__(246);
+	var _LoginModal = __webpack_require__(246);
 	
-	var _LoginViewModal2 = _interopRequireDefault(_LoginViewModal);
+	var _LoginModal2 = _interopRequireDefault(_LoginModal);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30951,7 +30951,7 @@
 	var propTypes = {
 	  travelFrom: _react2.default.PropTypes.string,
 	  moneyToSpend: _react2.default.PropTypes.currency,
-	  dateTo: _react2.default.PropTypes.string,
+	  dateto: _react2.default.PropTypes.string,
 	  dateBack: _react2.default.PropTypes.string,
 	  handleSearch: _react2.default.PropTypes.func
 	};

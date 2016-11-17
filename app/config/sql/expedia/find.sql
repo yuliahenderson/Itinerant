@@ -1,1 +1,1 @@
-SELECT * FROM expedia WHERE $1^=$2;
+SELECT * FROM expedia WHERE $1~=$2;

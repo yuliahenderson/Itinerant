@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import RegisterView from './RegisterView.jsx';
-import LoginView from './LoginView.jsx';
-import LoginViewModal from './LoginViewModal.jsx';
+import RegisterView from '../views/RegisterView.jsx';
+import LoginView from '../views/LoginView.jsx';
+import LoginModal from '../views/LoginModal.jsx';
 
 const propTypes = {
   logIn: React.PropTypes.func,
@@ -48,7 +48,7 @@ class Login extends Component {
          openModal={this.openModalSignup}
        />
        { this.state.modalOpen ?
-         <LoginViewModal
+         <LoginModal
             closeModal={this.closeModal}
             logIn={this.props.logIn}
             signUp={this.props.signUp}
