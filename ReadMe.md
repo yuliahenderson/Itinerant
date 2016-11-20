@@ -20,6 +20,6 @@ to your maximum input.
 
 - You can also click "Return trip" and see all the available return flights.
 
-Created by * <a href="https://github.com/desaibh">@desaibh/</a>, <a href="https://github.com/alvinchong92">@alvinchong92/</a>,
-<a href="https://github.com/yuliahenderson">@yuliahenderson/</a>
+Created by * <a href="https://github.com/desaibh">@desaibh</a>, <a href="https://github.com/alvinchong92">@alvinchong92</a>,
+<a href="https://github.com/yuliahenderson">@yuliahenderson</a>
 
